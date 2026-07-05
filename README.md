@@ -227,8 +227,5 @@ architecture-beta
 
 ## 10. Progress Report
 
-- [x] จัดทำ Project Proposal
-- [x] ออกแบบ Sequence Diagram
-- [ ] พัฒนาระบบส่วน Frontend
-- [ ] ทบทวนและทดสอบระบบ
+
 ```

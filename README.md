@@ -124,67 +124,32 @@ Needs:
 ## 3. Use Case Diagram
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#dce6f5', 'primaryTextColor': '#333', 'primaryBorderColor': '#7b9fd4', 'lineColor': '#666', 'secondaryColor': '#e8f0fe', 'tertiaryColor': '#f5f5f5', 'background': '#ffffff', 'mainBkg': '#ffffff'}}}%%
-flowchart TB
+flowchart LR
     Customer(("👤 ลูกค้า\n(Customer)"))
-    Staff(("👤 พนักงาน\n(Staff)"))
-    Manager(("👤 ผู้จัดการ\n(Manager)"))
 
-    subgraph SystemBoundary["ระบบร้านค้าออนไลน์อุปกรณ์คอมพิวเตอร์ (Tech Shop)"]
-
-        subgraph CustFunc["ฟังก์ชันสำหรับลูกค้า"]
-            direction LR
-            UC1([สมัครสมาชิก])
-            UC2([เข้าสู่ระบบ])
-            UC3([ค้นหาสินค้า])
-            UC3E(["ตัวกรองการค้นหา\n(แบรนด์ / รุ่น / ราคา / ประเภท / คุณสมบัติอื่น ๆ)"])
-            UC4([ดูรายละเอียดสินค้า])
-            UC5([เพิ่มสินค้าลงตะกร้า])
-            UC6(["จัดการตะกร้าสินค้า\n(แก้ไข / ลบ / ดูรายการ)"])
-            UC7([สั่งซื้อสินค้า])
-            UC7I([ยืนยันข้อมูลคำสั่งซื้อ])
-            UC8([ชำระเงิน])
-            UC8I([เลือกช่องทางชำระเงิน])
-            UC8I2([ชำระเงิน])
-            UC9([ติดตามสถานะคำสั่งซื้อ])
-            UC10([ประวัติการสั่งซื้อ])
-            UC11(["ติดต่อสอบถาม / รีวิวสินค้า"])
-        end
-
-        subgraph StaffFunc["ฟังก์ชันสำหรับพนักงาน"]
-            direction LR
-            US1([เข้าสู่ระบบ])
-            US2([ดูรายการคำสั่งซื้อทั้งหมด])
-            US3([ตรวจสอบและยืนยันคำสั่งซื้อ])
-            US4(["จัดเตรียมสินค้า / แพ็คสินค้า"])
-            US5([อัปเดตสถานะคำสั่งซื้อ])
-            US6([จัดการสต็อกสินค้า])
-            US6I1([ตรวจสอบสต็อก])
-            US6I2([รับสินค้าเข้า])
-            US6I3([ปรับปรุงสต็อก])
-        end
-
-        subgraph MgrFunc["ฟังก์ชันสำหรับผู้จัดการ"]
-            direction LR
-            UM1(["จัดการสินค้า\n(เพิ่ม / แก้ไข / ลบ)"])
-            UM2(["จัดการหมวดหมู่สินค้า\n(เพิ่ม / แก้ไข / ลบ)"])
-            UM3(["ดูแลแดชบอร์ดภาพรวม\n(Dashboard)"])
-            UM3I1([ยอดขายรวม])
-            UM3I2([สินค้ายอดนิยม])
-            UM3I3([คำสั่งซื้อรอจัดส่ง])
-            UM3I4([สถิติให้คะแนน])
-            UM4(["รายงานยอดขาย\n(รายวัน / รายเดือน / รายปี / ตามช่วง)"])
-            UM4I1([รายงานสินค้าคงเหลือ])
-            UM4I2([รายงานผลประกอบการ])
-            UM5(["จัดการผู้ใช้ระบบ\n(เพิ่ม / แก้ไข / ลบ / สิทธิ์)"])
-        end
-
+    subgraph OnlineStore_Customer["ฟังก์ชันสำหรับลูกค้า"]
+        UC1([สมัครสมาชิก])
+        UC2([เข้าสู่ระบบ])
+        UC3([ค้นหาสินค้า])
+        UC4([ดูรายละเอียดสินค้า])
+        UC5([เพิ่มสินค้าลงตะกร้า])
+        UC6(["จัดการตะกร้าสินค้า\n(แก้ไข / ลบ / ดูรายการ)"])
+        UC7([สั่งซื้อสินค้า])
+        UC8([ชำระเงิน])
+        UC9([ติดตามสถานะคำสั่งซื้อ])
+        UC10([ประวัติการสั่งซื้อ])
+        UC11(["ติดต่อสอบถาม / รีวิวสินค้า"])
     end
 
-    subgraph ExtServices["บริการภายนอก"]
-        direction LR
-        EXT1[("💳 ระบบชำระเงินออนไลน์\n(เช่น Credit Card / PromptPay)")]
-        EXT2[("🚚 ระบบขนส่ง\n(เช่น EMS / Kerry / Flash)")]
+    subgraph extend_include[" "]
+        UC3E(["ตัวกรองการค้นหา\n(แบรนด์ / รุ่น / ราคา\nประเภท / คุณสมบัติอื่น ๆ)"])
+        UC7I([ยืนยันข้อมูลคำสั่งซื้อ])
+        UC8I([เลือกช่องทางชำระเงิน])
+        UC8I2([ชำระเงิน])
+    end
+
+    subgraph ExtServices_1[" "]
+        EXT1[("💳 ระบบชำระเงินออนไลน์\n(Credit Card / PromptPay)")]
     end
 
     Customer --- UC1
@@ -203,6 +168,33 @@ flowchart TB
     UC7 -. "≪include≫" .-> UC7I
     UC8 -. "≪include≫" .-> UC8I
     UC8I -. "≪include≫" .-> UC8I2
+    UC8 --- EXT1
+```
+
+### 3.2 ฟังก์ชันสำหรับพนักงาน (Staff)
+
+```mermaid
+flowchart LR
+    Staff(("👤 พนักงาน\n(Staff)"))
+
+    subgraph OnlineStore_Staff["ฟังก์ชันสำหรับพนักงาน"]
+        US1([เข้าสู่ระบบ])
+        US2([ดูรายการคำสั่งซื้อทั้งหมด])
+        US3([ตรวจสอบและยืนยันคำสั่งซื้อ])
+        US4(["จัดเตรียมสินค้า / แพ็คสินค้า"])
+        US5([อัปเดตสถานะคำสั่งซื้อ])
+        US6([จัดการสต็อกสินค้า])
+    end
+
+    subgraph include_stock[" "]
+        US6I1([ตรวจสอบสต็อก])
+        US6I2([รับสินค้าเข้า])
+        US6I3([ปรับปรุงสต็อก])
+    end
+
+    subgraph ExtServices_2[" "]
+        EXT2[("🚚 ระบบขนส่ง\n(EMS / Kerry / Flash)")]
+    end
 
     Staff --- US1
     Staff --- US2
@@ -214,6 +206,34 @@ flowchart TB
     US6 -. "≪include≫" .-> US6I1
     US6 -. "≪include≫" .-> US6I2
     US6 -. "≪include≫" .-> US6I3
+    US5 --- EXT2
+```
+
+### 3.3 ฟังก์ชันสำหรับผู้จัดการ (Manager)
+
+```mermaid
+flowchart LR
+    Manager(("👤 ผู้จัดการ\n(Manager)"))
+
+    subgraph OnlineStore_Manager["ฟังก์ชันสำหรับผู้จัดการ"]
+        UM1(["จัดการสินค้า\n(เพิ่ม / แก้ไข / ลบ)"])
+        UM2(["จัดการหมวดหมู่สินค้า\n(เพิ่ม / แก้ไข / ลบ)"])
+        UM3(["ดูแลแดชบอร์ดภาพรวม\n(Dashboard)"])
+        UM4(["รายงานยอดขาย\n(รายวัน / รายเดือน / รายปี / ตามช่วง)"])
+        UM5(["จัดการผู้ใช้ระบบ\n(เพิ่ม / แก้ไข / ลบ / สิทธิ์)"])
+    end
+
+    subgraph include_dashboard[" "]
+        UM3I1([ยอดขายรวม])
+        UM3I2([สินค้ายอดนิยม])
+        UM3I3([คำสั่งซื้อรอจัดส่ง])
+        UM3I4([สถิติให้คะแนน])
+    end
+
+    subgraph include_report[" "]
+        UM4I1([รายงานสินค้าคงเหลือ])
+        UM4I2([รายงานผลประกอบการ])
+    end
 
     Manager --- UM1
     Manager --- UM2
@@ -227,14 +247,6 @@ flowchart TB
     UM3 -. "≪include≫" .-> UM3I4
     UM4 -. "≪include≫" .-> UM4I1
     UM4 -. "≪include≫" .-> UM4I2
-
-    UC8 --- EXT1
-    US5 --- EXT2
-
-    CustFunc --> StaffFunc
-    StaffFunc --> MgrFunc
-    linkStyle 28 stroke:none,stroke-width:0
-    linkStyle 29 stroke:none,stroke-width:0
 ```
 
 ---

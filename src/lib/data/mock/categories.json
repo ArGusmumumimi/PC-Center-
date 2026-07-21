@@ -1,0 +1,82 @@
+[
+  {
+    "id": "cat_001",
+    "name": "โปรเซสเซอร์ (CPU)",
+    "slug": "cpu",
+    "description": "หน่วยประมวลผลกลาง",
+    "icon": "Cpu",
+    "productCount": 4
+  },
+  {
+    "id": "cat_002",
+    "name": "กราฟิกการ์ด (GPU)",
+    "slug": "gpu",
+    "description": "การ์ดจอสำหรับเล่นเกมและทำงาน",
+    "icon": "Monitor",
+    "productCount": 4
+  },
+  {
+    "id": "cat_003",
+    "name": "แรม (RAM)",
+    "slug": "ram",
+    "description": "หน่วยความจำ",
+    "icon": "MemoryStick",
+    "productCount": 3
+  },
+  {
+    "id": "cat_004",
+    "name": "SSD / HDD",
+    "slug": "storage",
+    "description": "อุปกรณ์จัดเก็บข้อมูล",
+    "icon": "HardDrive",
+    "productCount": 3
+  },
+  {
+    "id": "cat_005",
+    "name": "เมนบอร์ด",
+    "slug": "motherboard",
+    "description": "แผงวงจรหลัก",
+    "icon": "CircuitBoard",
+    "productCount": 2
+  },
+  {
+    "id": "cat_006",
+    "name": "พาวเวอร์ซัพพลาย (PSU)",
+    "slug": "psu",
+    "description": "อุปกรณ์จ่ายไฟ",
+    "icon": "Zap",
+    "productCount": 2
+  },
+  {
+    "id": "cat_007",
+    "name": "เคส (Case)",
+    "slug": "case",
+    "description": "เคสคอมพิวเตอร์",
+    "icon": "Box",
+    "productCount": 2
+  },
+  {
+    "id": "cat_008",
+    "name": "จอมอนิเตอร์",
+    "slug": "monitor",
+    "description": "จอแสดงผล",
+    "icon": "MonitorSmartphone",
+    "productCount": 2
+  },
+  {
+    "id": "cat_009",
+    "name": "คีย์บอร์ด & เมาส์",
+    "slug": "peripherals",
+    "description": "อุปกรณ์ต่อพ่วง",
+    "icon": "Keyboard",
+    "productCount": 2
+  },
+  {
+    "id": "cat_010",
+    "name": "หูฟัง & ลำโพง",
+    "slug": "audio",
+    "description": "อุปกรณ์เสียง",
+    "icon": "Headphones",
+    "productCount": 2
+  }
+]

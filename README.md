@@ -9,14 +9,15 @@
 
 1. [ข้อเสนอโครงงาน (Project Proposal)](#1-ข้อเสนอโครงงาน-project-proposal)
 2. [Persona Design](#2-persona-design)
-3. [Use Case Diagram](#3-use-case-diagram)
-4. [Class Diagram](#4-class-diagram)
-5. [แผนภาพลำดับการทำงาน (Sequence Diagram)](#5-แผนภาพลำดับการทำงาน-sequence-diagram)
-6. [Wireframe](#6-wireframe)
-7. [System Architecture](#7-system-architecture)
-8. [Tools & Technologies](#8-tools--technologies)
-9. [Data Schema (JSON)](#9-data-schema-json)
-10. [Progress Report](#10-progress-report)
+3. [การประยุกต์ใช้เครื่องมือในกระบวนการ SDLC](#3-การประยุกต์ใช้เครื่องมือในกระบวนการ-sdlc)
+4. [Use Case Diagram](#4-use-case-diagram)
+5. [Class Diagram](#5-class-diagram)
+6. [แผนภาพลำดับการทำงาน (Sequence Diagram)](#6-แผนภาพลำดับการทำงาน-sequence-diagram)
+7. [Wireframe และ Prototype](#7-wireframe-และ-prototype)
+8. [System Architecture](#8-system-architecture)
+9. [Tools & Technologies](#9-tools--technologies)
+10. [Data Schema (JSON)](#10-data-schema-json)
+11. [User Acceptance Testing](#11-user-acceptance-testing)
 
 ---
 
@@ -33,11 +34,9 @@
 
 | ลำดับ | รหัสนักศึกษา | ชื่อ-สกุล | หน้าที่รับผิดชอบ |
 | :---: | :---: | :--- | :--- |
-| 1 | [รหัส] | [ชื่อ-สกุล] | Project Manager |
-| 2 | 67090746 | นายธนากร ธิติพุทธปราสาท | full stack dev |
-| 3 | 66097807 | นายเป็นไท ศรีไชยมูล | [หน้าที่] |
-| 4 | [รหัส] | [ชื่อ-สกุล] | [หน้าที่] |
-| 5 | [รหัส] | [ชื่อ-สกุล] | [หน้าที่] |
+| 1 | 67090746 | นายธนากร ธิติพุทธปราสาท | Project Manager |
+| 2 | 66097958 |นายยศพล เปี่ยมบางแวก | full stack dev |
+| 3 | 66097807 | นายเป็นไท ศรีไชยมูล | full stack dev |
 
 ### 🎯 วัตถุประสงค์ (Objectives)
 1. เพื่อออกแบบและพัฒนาเว็บไซต์อีคอมเมิร์ซสำหรับจำหน่ายอุปกรณ์คอมพิวเตอร์ ที่มีดีไซน์ทันสมัย ใช้งานง่าย
@@ -45,9 +44,23 @@
 3. เพื่อพัฒนาระบบจัดการหลังบ้าน (Dashboard) ที่มีการแบ่งระดับสิทธิ์การเข้าถึง (Role-based Access Control) เพื่อให้ทีมงานสามารถบริหารจัดการสินค้า คำสั่งซื้อ และข้อมูลผู้ใช้ได้อย่างมีประสิทธิภาพ
 
 ### 🔍 ขอบเขตของโครงงาน (Project Scope)
-* **Customer (ลูกค้า):** สามารถเข้าสู่ระบบ, ค้นหาและกรองสินค้าตามหมวดหมู่ (เช่น CPU, GPU), ดูรายละเอียด, จัดการตะกร้าสินค้า, ทำรายการสั่งซื้อ (ระบบจำลองการชำระเงิน) และติดตามสถานะคำสั่งซื้อของตนเองได้
-* **Staff (พนักงาน):** สามารถเข้าสู่ระบบจัดการหลังบ้าน, ดูภาพรวมแดชบอร์ด (Dashboard), จัดการและอัปเดตสถานะคำสั่งซื้อของลูกค้า และดูฐานข้อมูลลูกค้าได้
-* **Manager (ผู้จัดการ):** มีสิทธิ์สูงสุดครอบคลุมการทำงานของพนักงาน และสามารถจัดการเพิ่ม/ลด/แก้ไขข้อมูลสินค้า, หมวดหมู่สินค้า, บริหารจัดการสิทธิ์ผู้ใช้งาน (Role) ของบุคคลอื่นในระบบได้
+* **Customer (ลูกค้า):**
+  - ระบบสมัครสมาชิกและเข้าสู่ระบบ
+  - ระบบค้นหาและกรองสินค้าตามหมวดหมู่
+  - ระบบดูรายละเอียดสินค้า
+  - ระบบจัดการตะกร้าสินค้า
+  - ระบบสั่งซื้อสินค้าและชำระเงิน
+  - ระบบติดตามสถานะคำสั่งซื้อและประวัติการสั่งซื้อ
+  - ระบบติดต่อสอบถามและรีวิวสินค้า
+* **Staff (พนักงาน):**
+  - ระบบเข้าสู่ระบบ
+  - ระบบดูรายการคำสั่งซื้อทั้งหมด
+  - ระบบอัปเดตสถานะคำสั่งซื้อ
+* **Manager (ผู้จัดการ):**
+  - ระบบจัดการหมวดหมู่สินค้า (เพิ่ม / แก้ไข / ลบ)
+  - ระบบจัดการสต็อกสินค้า
+  - ระบบดูข้อมูลลูกค้า (เช่น ที่อยู่ การติดต่อ)
+  - ระบบจัดการผู้ใช้ระบบ (เพิ่ม / แก้ไข / ลบ / สิทธิ์)
 
 ### 📊 ความเป็นไปได้ของโครงงาน (Project Feasibility)
 * **ด้านเทคนิค:** ใช้เทคโนโลยี Next.js ที่ผู้พัฒนาคุ้นเคยและมีแหล่งข้อมูลสนับสนุนครบถ้วน
@@ -121,7 +134,38 @@ Needs:
 
 ---
 
-## 3. Use Case Diagram
+## 3. การประยุกต์ใช้เครื่องมือในกระบวนการ SDLC
+
+ทีมของเราเลือกใช้เครื่องมือต่างๆ ในแต่ละขั้นตอนของการพัฒนาโปรเจกต์ (SDLC) ดังนี้:
+
+### 3.1 Planning (การวางแผน)
+* **เครื่องมือที่ใช้:** GitHub Projects, Discord
+* **เหตุผล:** เราต้องการระบบที่ช่วยแบ่งงานให้คนในทีมและอัปเดตงานได้ง่ายๆ รวมถึงมีช่องทางไว้แชทคุยและประชุมงานกัน
+* **การนำไปใช้งาน:** เราใช้ GitHub Projects เพื่อลิสต์ว่าใครต้องทำอะไรบ้าง และงานถึงไหนแล้ว ส่วน Discord เอาไว้พูดคุยและอัปเดตความคืบหน้าของทีม
+
+### 3.2 Analysis & Design (การวิเคราะห์และออกแบบ)
+* **เครื่องมือที่ใช้:** Figma, Mermaid.js
+* **เหตุผล:** Figma ใช้งานง่ายและเหมาะกับการออกแบบหน้าจอเว็บ ส่วน Mermaid.js ช่วยให้เราเขียนแผนภาพระบบผ่านการเขียนโค้ดง่ายๆ (Markdown)
+* **การนำไปใช้งาน:** เราใช้ Mermaid.js วาดแผนภาพการทำงานของระบบ (เช่น Use Case, Class, Sequence Diagram) และใช้ Figma ออกแบบโครงร่างเว็บ (Wireframe) รวมถึงทำตัวต้นแบบเว็บที่กดโต้ตอบได้จริง (Prototype)
+
+### 3.3 Development (การพัฒนา)
+* **เครื่องมือที่ใช้:** VS Code, Git/GitHub, Next.js, Tailwind CSS
+* **เหตุผล:** เป็นกลุ่มเครื่องมือยอดฮิตที่ช่วยให้เราสร้างเว็บได้เร็วขึ้น และสามารถแชร์โค้ดทำงานร่วมกันหลายคนได้อย่างเป็นระบบ
+* **การนำไปใช้งาน:** ทีมใช้ VS Code เพื่อเขียนโค้ดตัวเว็บด้วยเฟรมเวิร์ก Next.js แล้วตกแต่งความสวยงามด้วย Tailwind CSS จากนั้นจะส่งโค้ดทั้งหมดไปรวมและเก็บรักษาไว้บน GitHub
+
+### 3.4 Testing (การทดสอบ)
+* **เครื่องมือที่ใช้:** Chrome DevTools, Postman
+* **เหตุผล:** เป็นเครื่องมือพื้นฐานในการใช้ตรวจเช็กความเรียบร้อยของหน้าเว็บ และเช็กการทำงานของระบบหลังบ้าน (API)
+* **การนำไปใช้งาน:** เราใช้ Chrome DevTools เพื่อทดสอบว่าหน้าเว็บแสดงผลบนมือถือได้พอดีไหม และเช็กระบบตะกร้าสินค้าในเบราว์เซอร์ ส่วน Postman เราใช้จำลองการส่งข้อมูลไปที่ระบบหลังบ้านเพื่อดูว่าตอบกลับมาถูกต้องหรือไม่
+
+### 3.5 Deployment (การนำเว็บขึ้นออนไลน์)
+* **เครื่องมือที่ใช้:** Vercel
+* **เหตุผล:** ใช้งานฟรี สะดวก และทำงานเข้ากับ Next.js ได้อย่างไร้รอยต่อ
+* **การนำไปใช้งาน:** เราเชื่อมต่อ Vercel เข้ากับ GitHub ของโปรเจกต์ เมื่อมีคนในทีมอัปเดตโค้ดเวอร์ชันใหม่ลงในระบบ Vercel จะทำการประมวลผลและอัปเดตเว็บไซต์ออนไลน์ให้ใหม่โดยอัตโนมัติ
+
+---
+
+## 4. Use Case Diagram
 
 ```mermaid
 flowchart LR
@@ -132,20 +176,18 @@ flowchart LR
         UC2([เข้าสู่ระบบ])
         UC3([ค้นหาสินค้า])
         UC4([ดูรายละเอียดสินค้า])
-        UC5([เพิ่มสินค้าลงตะกร้า])
-        UC6(["จัดการตะกร้าสินค้า\n(แก้ไข / ลบ / ดูรายการ)"])
-        UC7([สั่งซื้อสินค้า])
-        UC8([ชำระเงิน])
-        UC9([ติดตามสถานะคำสั่งซื้อ])
-        UC10([ประวัติการสั่งซื้อ])
-        UC11(["ติดต่อสอบถาม / รีวิวสินค้า"])
+        UC5(["จัดการตะกร้าสินค้า\n(เพิ่ม / แก้ไข / ลบ / ดูรายการ)"])
+        UC6([สั่งซื้อสินค้า])
+        UC7([ชำระเงิน])
+        UC8([ติดตามสถานะคำสั่งซื้อ])
+        UC9([ประวัติการสั่งซื้อ])
+        UC10(["ติดต่อสอบถาม / รีวิวสินค้า"])
     end
 
     subgraph extend_include[" "]
         UC3E(["ตัวกรองการค้นหา\n(แบรนด์ / รุ่น / ราคา\nประเภท / คุณสมบัติอื่น ๆ)"])
-        UC7I([ยืนยันข้อมูลคำสั่งซื้อ])
-        UC8I([เลือกช่องทางชำระเงิน])
-        UC8I2([ชำระเงิน])
+        UC7I([เลือกช่องทางชำระเงิน])
+        UC7I2([ชำระเงิน])
     end
 
     subgraph ExtServices_1[" "]
@@ -162,16 +204,14 @@ flowchart LR
     Customer --- UC8
     Customer --- UC9
     Customer --- UC10
-    Customer --- UC11
 
     UC3 -. "≪extend≫" .-> UC3E
     UC7 -. "≪include≫" .-> UC7I
-    UC8 -. "≪include≫" .-> UC8I
-    UC8I -. "≪include≫" .-> UC8I2
-    UC8 --- EXT1
+    UC7I -. "≪include≫" .-> UC7I2
+    UC7 --- EXT1
 ```
 
-### 3.2 ฟังก์ชันสำหรับพนักงาน (Staff)
+### 4.2 ฟังก์ชันสำหรับพนักงาน (Staff)
 
 ```mermaid
 flowchart LR
@@ -180,16 +220,7 @@ flowchart LR
     subgraph OnlineStore_Staff["ฟังก์ชันสำหรับพนักงาน"]
         US1([เข้าสู่ระบบ])
         US2([ดูรายการคำสั่งซื้อทั้งหมด])
-        US3([ตรวจสอบและยืนยันคำสั่งซื้อ])
-        US4(["จัดเตรียมสินค้า / แพ็คสินค้า"])
-        US5([อัปเดตสถานะคำสั่งซื้อ])
-        US6([จัดการสต็อกสินค้า])
-    end
-
-    subgraph include_stock[" "]
-        US6I1([ตรวจสอบสต็อก])
-        US6I2([รับสินค้าเข้า])
-        US6I3([ปรับปรุงสต็อก])
+        US3([อัปเดตสถานะคำสั่งซื้อ])
     end
 
     subgraph ExtServices_2[" "]
@@ -199,59 +230,42 @@ flowchart LR
     Staff --- US1
     Staff --- US2
     Staff --- US3
-    Staff --- US4
-    Staff --- US5
-    Staff --- US6
 
-    US6 -. "≪include≫" .-> US6I1
-    US6 -. "≪include≫" .-> US6I2
-    US6 -. "≪include≫" .-> US6I3
-    US5 --- EXT2
+    US3 --- EXT2
 ```
 
-### 3.3 ฟังก์ชันสำหรับผู้จัดการ (Manager)
+### 4.3 ฟังก์ชันสำหรับผู้จัดการ (Manager)
 
 ```mermaid
 flowchart LR
     Manager(("👤 ผู้จัดการ\n(Manager)"))
 
     subgraph OnlineStore_Manager["ฟังก์ชันสำหรับผู้จัดการ"]
-        UM1(["จัดการสินค้า\n(เพิ่ม / แก้ไข / ลบ)"])
+        UM1(["จัดการสินค้าและสต็อกสินค้า\n(เพิ่ม / แก้ไข / ลบ / สต็อก)"])
         UM2(["จัดการหมวดหมู่สินค้า\n(เพิ่ม / แก้ไข / ลบ)"])
-        UM3(["ดูแลแดชบอร์ดภาพรวม\n(Dashboard)"])
-        UM4(["รายงานยอดขาย\n(รายวัน / รายเดือน / รายปี / ตามช่วง)"])
+        UM4(["ดูข้อมูลลูกค้า\n(เช่น ที่อยู่ การติดต่อ)"])
         UM5(["จัดการผู้ใช้ระบบ\n(เพิ่ม / แก้ไข / ลบ / สิทธิ์)"])
     end
 
-    subgraph include_dashboard[" "]
-        UM3I1([ยอดขายรวม])
-        UM3I2([สินค้ายอดนิยม])
-        UM3I3([คำสั่งซื้อรอจัดส่ง])
-        UM3I4([สถิติให้คะแนน])
-    end
-
-    subgraph include_report[" "]
-        UM4I1([รายงานสินค้าคงเหลือ])
-        UM4I2([รายงานผลประกอบการ])
+    subgraph include_stock[" "]
+        UM1I1([ตรวจสอบสต็อก])
+        UM1I2([รับสินค้าเข้า])
+        UM1I3([ปรับปรุงสต็อก])
     end
 
     Manager --- UM1
     Manager --- UM2
-    Manager --- UM3
     Manager --- UM4
     Manager --- UM5
 
-    UM3 -. "≪include≫" .-> UM3I1
-    UM3 -. "≪include≫" .-> UM3I2
-    UM3 -. "≪include≫" .-> UM3I3
-    UM3 -. "≪include≫" .-> UM3I4
-    UM4 -. "≪include≫" .-> UM4I1
-    UM4 -. "≪include≫" .-> UM4I2
+    UM1 -. "≪include≫" .-> UM1I1
+    UM1 -. "≪include≫" .-> UM1I2
+    UM1 -. "≪include≫" .-> UM1I3
 ```
 
 ---
 
-## 4. Class Diagram
+## 5. Class Diagram
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#dce6f5', 'primaryTextColor': '#333', 'primaryBorderColor': '#7b9fd4', 'lineColor': '#666', 'background': '#ffffff', 'mainBkg': '#ffffff', 'classText': '#333'}}}%%
@@ -291,9 +305,8 @@ classDiagram
         -string firstName
         -string lastName
         -string position
-        +createOrder() Order
+        +viewOrders() List~Order~
         +updateOrderStatus() void
-        +checkStock() void
     }
 
     class Manager {
@@ -301,10 +314,11 @@ classDiagram
         -string firstName
         -string lastName
         -string department
-        +viewDashboard() void
-        +viewReport() void
-        +manageInventory() void
-        +manageItem() void
+        +manageProduct() void
+        +manageCategory() void
+        +manageStock() void
+        +viewCustomerInfo() void
+        +manageUser() void
     }
 
     class Brand {
@@ -354,14 +368,18 @@ classDiagram
         -string sku
         -string name
         -text description
-        -string genre
-        -string colorSize
-        -string movement
-        -string warranty
+        -decimal price
         -string status
         -datetime createdAt
         +getImages() List~ProductImage~
-        +getCurrentPrice() decimal
+    }
+
+    class ProductItem {
+        -int itemId
+        -int productId
+        -string serialNumber
+        -string warranty
+        -string status
     }
 
     class ProductImage {
@@ -376,11 +394,9 @@ classDiagram
         -int inventoryId
         -int productId
         -int quantityOnHand
-        -int reorderLevel
         -datetime lastUpdated
-        +addStockChange() void
-        +checkReserveQty() int
-        +checkReorderLevel() boolean
+        +addStock() void
+        +reduceStock() void
     }
 
     class Cart {
@@ -411,7 +427,6 @@ classDiagram
         -int productId
         -int quantity
         -decimal unitPrice
-        -decimal discount
         +getSubTotal() decimal
     }
 
@@ -422,26 +437,9 @@ classDiagram
         -datetime orderDate
         -string status
         -decimal totalAmount
-        -decimal discountPrice
         -decimal shippingAmount
         -datetime createdAt
-        +confirmOrder() void
         +calculateTotal() decimal
-    }
-
-    class Promotion {
-        -int promotionId
-        -string code
-        -string name
-        -string type
-        -decimal value
-        -decimal minOrderAmount
-        -decimal discountPrice
-        -datetime startDate
-        -datetime endDate
-        -string status
-        +isValid() boolean
-        +calculateDiscountAmount() decimal
     }
 
     class Payment {
@@ -480,51 +478,16 @@ classDiagram
         -boolean isDefault
     }
 
-    class Report {
-        <<abstract>>
-        -int reportId
-        -string reportType
-        -date startDate
-        -date endDate
-        -datetime generatedAt
-        +generate() void
-        +reportType() void
-    }
-
-    class SalesReport {
-        -decimal totalSales
-        -int totalOrders
-        -List topProducts
-        +generate() void
-    }
-
-    class InventoryReport {
-        -int totalItems
-        -int lowStockCount
-        -List topProducts
-        +generate() void
-    }
-
-    class ProfitReport {
-        -decimal totalCost
-        -decimal totalRevenue
-        -decimal netProfit
-        +generate() void
-    }
-
     User <|-- Customer
     User <|-- Staff
     User <|-- Manager
-
-    Report <|-- SalesReport
-    Report <|-- InventoryReport
-    Report <|-- ProfitReport
 
     Brand "1" --> "1..*" Model
     Brand "1" --> "1..*" Product
     Model "1" --> "1..*" Product
     Category "1" --> "1..*" Product
 
+    Product "1" --> "1..*" ProductItem
     Product "1" --> "1" Inventory
     Product "1" --> "1..*" ProductImage
     Product "1" --> "0..*" Review
@@ -542,15 +505,13 @@ classDiagram
     Order "1" --> "1" Payment
     Order "1" --> "1" Shipping
     Order "1" --> "0..1" Address
-
-    Promotion "0..*" ..> Order : applies to
 ```
 
 ---
 
-## 5. แผนภาพลำดับการทำงาน (Sequence Diagram)
+## 6. แผนภาพลำดับการทำงาน (Sequence Diagram)
 
-### 5.1 กระบวนการของลูกค้า : ค้นหาสินค้าและสั่งซื้อ
+### 6.1 กระบวนการของลูกค้า : ค้นหาสินค้าและสั่งซื้อ
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'actorBkg': '#dce6f5', 'actorTextColor': '#333', 'actorBorder': '#7b9fd4', 'signalColor': '#333', 'signalTextColor': '#333', 'labelBoxBkgColor': '#dce6f5', 'labelBoxBorderColor': '#7b9fd4', 'labelTextColor': '#333', 'loopTextColor': '#333', 'noteBkgColor': '#fff3cd', 'noteTextColor': '#333', 'noteBorderColor': '#ffc107', 'activationBkgColor': '#e8f0fe', 'activationBorderColor': '#7b9fd4', 'sequenceNumberColor': '#fff', 'background': '#ffffff'}}}%%
@@ -570,7 +531,7 @@ sequenceDiagram
     C->>WEB: 1. เข้าสู่เว็บไซต์
     WEB-->>C: 1.1 แสดงหน้าแรก
 
-    C->>WEB: 2. ค้นหาสินค้า (กรุณาใส่ชื่อ แบรนด์/รุ่น/ราคา/ประเภท)
+    C->>WEB: 2. ค้นหาสินค้า (กรองแบรนด์/รุ่น/ราคา)
     WEB->>SEARCH: 2.1.1 ส่งข้อมูลการค้นหา
     SEARCH->>PROD: 2.1.1.1 สืบค้นสินค้า
     PROD->>INV: 2.1.1.1.1 ดึงข้อมูลสต็อกสินค้า
@@ -579,10 +540,10 @@ sequenceDiagram
     SEARCH-->>WEB: 2.1.2 แสดงรายการสินค้า
     WEB-->>C: 2.2 แสดงผลรายการสินค้า
 
-    C->>WEB: 3. เลือกสินค้าและเพิ่มลงตะกร้า
-    WEB->>CART: 3.1 เพิ่มสินค้าเข้าตะกร้า
+    C->>WEB: 3. จัดการตะกร้าสินค้า (เพิ่ม/แก้ไข)
+    WEB->>CART: 3.1 อัปเดตข้อมูลตะกร้า
     CART->>DB: 3.1.1 บันทึกรายการตะกร้า
-    DB-->>CART: 3.1.2 ยืนยันการเพิ่มสินค้า
+    DB-->>CART: 3.1.2 ยืนยันการเปลี่ยนแปลง
     CART-->>WEB: 3.2 แสดงตะกร้าสินค้า
 
     C->>WEB: 4. ดำเนินการสั่งซื้อ
@@ -601,7 +562,7 @@ sequenceDiagram
     WEB-->>C: 5.5 แสดงผลยืนยันการสั่งซื้อสำเร็จ
 ```
 
-### 5.2 กระบวนการของพนักงาน : จัดการออเดอร์และสต็อกสินค้า
+### 6.2 กระบวนการของพนักงาน : จัดการออเดอร์
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'actorBkg': '#d5f5e3', 'actorTextColor': '#333', 'actorBorder': '#27ae60', 'signalColor': '#333', 'signalTextColor': '#333', 'labelBoxBkgColor': '#d5f5e3', 'labelBoxBorderColor': '#27ae60', 'labelTextColor': '#333', 'activationBkgColor': '#eafaf1', 'activationBorderColor': '#27ae60', 'sequenceNumberColor': '#fff', 'background': '#ffffff'}}}%%
@@ -610,45 +571,28 @@ sequenceDiagram
     actor S as พนักงาน (Staff)
     participant SUI as Staff UI (Frontend)
     participant ORD as Order Service
-    participant INV as Inventory Service
-    participant PROD as Product Service
-    participant SHIP as Shipping Service
     participant NOTI as Notification Service
     participant DB as Database
 
     S->>SUI: 1. เข้าสู่ระบบ (พนักงาน)
     SUI-->>S: 1.1 แสดงหน้าจัดการ
 
-    S->>SUI: 2. ดูรายการคำสั่งซื้อใหม่
-    SUI->>ORD: 2.1 ดึงรายการคำสั่งซื้อ (สถานะ: รอจัดส่ง)
-    ORD->>DB: 2.1.1 ดึงข้อมูลคำสั่งซื้อ
+    S->>SUI: 2. ดูรายการคำสั่งซื้อ
+    SUI->>ORD: 2.1 ดึงรายการคำสั่งซื้อ
+    ORD->>DB: 2.1.1 ดึงข้อมูล
     DB-->>ORD: 2.1.2 ข้อมูลคำสั่งซื้อ
     ORD-->>SUI: 2.2 แสดงรายการ
 
-    S->>SUI: 3. ตรวจสอบและยืนยันคำสั่งซื้อ
-    SUI->>INV: 3.1 ตรวจสอบสต็อก/ของสินค้า
-    INV->>DB: 3.1.1 ตรวจสอบจำนวนสต็อก
-    DB-->>INV: 3.1.2 ผลการตรวจสอบ
-    INV-->>SUI: 3.2 แสดงผลการตรวจสอบ
-
-    S->>SUI: 4. บันทึกการจัดเตรียมสินค้า
-    SUI->>SHIP: 4.1 บันทึกข้อมูลการจัดเตรียม
-    SHIP->>DB: 4.1.1 บันทึกข้อมูลการจัดส่ง
-    DB-->>SHIP: 4.1.2 ยืนยันการบันทึก
-
-    S->>SUI: 5. อัปเดตสถานะออเดอร์
-    SUI->>ORD: 5.1 อัปเดตสถานะ (เป็น จัดส่งแล้ว)
-    ORD->>DB: 5.1.1 อัปเดตสถานะคำสั่งซื้อ
-    DB-->>ORD: 5.2 สถานะเปลี่ยนแปลงสำเร็จ
-    ORD->>NOTI: 5.2.1 ส่งอีเมล/แจ้งเตือนลูกค้าการจัดส่ง
-
-    S->>SUI: 6. ปรับปรุงสต็อกสินค้า
-    SUI->>INV: 6.1 ดึงข้อมูลสินค้า
-    INV->>DB: 6.1.1 อัปเดตสต็อกสินค้า
-    DB-->>INV: 6.1.2 ยืนยันการอัปเดต
+    S->>SUI: 3. อัปเดตสถานะคำสั่งซื้อ (เช่น จัดส่งแล้ว)
+    SUI->>ORD: 3.1 ส่งข้อมูลอัปเดตสถานะ
+    ORD->>DB: 3.1.1 บันทึกสถานะคำสั่งซื้อ
+    DB-->>ORD: 3.1.2 สถานะเปลี่ยนแปลงสำเร็จ
+    ORD->>NOTI: 3.2 ส่งการแจ้งเตือนสถานะให้ลูกค้า
+    NOTI-->>SUI: 3.3 แจ้งเตือนสำเร็จ
+    SUI-->>S: 3.4 แสดงผลอัปเดตสำเร็จ
 ```
 
-### 5.3 กระบวนการของผู้จัดการ : ดูรายงานและแดชบอร์ด
+### 6.3 กระบวนการของผู้จัดการ : จัดการข้อมูลลูกค้า สินค้า และผู้ใช้ระบบ
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'actorBkg': '#e8daef', 'actorTextColor': '#333', 'actorBorder': '#8e44ad', 'signalColor': '#333', 'signalTextColor': '#333', 'labelBoxBkgColor': '#e8daef', 'labelBoxBorderColor': '#8e44ad', 'labelTextColor': '#333', 'activationBkgColor': '#f4ecf7', 'activationBorderColor': '#8e44ad', 'sequenceNumberColor': '#fff', 'background': '#ffffff'}}}%%
@@ -656,45 +600,43 @@ sequenceDiagram
     autonumber
     actor M as ผู้จัดการ (Manager)
     participant MUI as Manager UI (Dashboard)
-    participant RPT as Report Service
-    participant ORD as Order Service
     participant INV as Inventory Service
-    participant PAY as Payment Service
+    participant CUST as Customer Service
+    participant USR as User Management Service
     participant DB as Database
 
     M->>MUI: 1. เข้าสู่ระบบ (ผู้จัดการ)
-    MUI-->>M: 1.1 แสดงหน้าแดชบอร์ด
+    MUI-->>M: 1.1 แสดงหน้าระบบจัดการ
 
-    M->>MUI: 2. เลือกดูรายงาน/ช่วงเวลาที่ต้องการ
-    MUI->>RPT: 2.1 ขอข้อมูลรายงานตามช่วงเวลาที่เลือก
-    RPT->>ORD: 2.1.1 ดึงข้อมูลคำสั่งซื้อ
-    ORD->>DB: 2.1.1.1 ข้อมูลคำสั่งซื้อ
-    DB-->>ORD: ข้อมูลคำสั่งซื้อ
-    ORD-->>RPT: ข้อมูลคำสั่งซื้อ
-    RPT->>INV: 2.1.2 ข้อมูลสินค้าคงเหลือ
-    INV->>DB: 2.1.2.1 ข้อมูลสต็อกสินค้า
-    DB-->>INV: ข้อมูลสต็อก
-    INV-->>RPT: ข้อมูลสินค้าคงเหลือ
-    RPT->>PAY: 2.1.3 ดึงข้อมูลการชำระเงินในช่วงนั้น
-    PAY->>DB: 2.1.3.1 ข้อมูลรายการเงิน
-    DB-->>PAY: ข้อมูลการเงิน
-    PAY-->>RPT: ข้อมูลการชำระเงิน
-    RPT-->>MUI: 2.1.4 ส่งข้อมูลสรุป
-    MUI-->>M: 2.2 แสดงรายงาน/แดชบอร์ด
+    M->>MUI: 2. ดูข้อมูลลูกค้า
+    MUI->>CUST: 2.1 ดึงข้อมูลลูกค้า
+    CUST->>DB: 2.1.1 ขอข้อมูล (ที่อยู่, การติดต่อ)
+    DB-->>CUST: 2.1.2 คืนค่าข้อมูล
+    CUST-->>MUI: 2.2 แสดงรายชื่อและข้อมูลลูกค้า
 
-    M->>MUI: 3. ส่งออกรายงาน
-    MUI-->>M: 3.2 ดาวน์โหลดไฟล์รายงาน
+    M->>MUI: 3. จัดการสินค้าและสต็อก (เพิ่ม/ลด)
+    MUI->>INV: 3.1 ส่งข้อมูลอัปเดตสินค้าและสต็อก
+    INV->>DB: 3.1.1 บันทึกข้อมูลสินค้าและสต็อก
+    DB-->>INV: 3.1.2 ยืนยันการอัปเดต
+    INV-->>MUI: 3.2 แสดงผลอัปเดตสำเร็จ
+
+    M->>MUI: 4. จัดการผู้ใช้ระบบและสิทธิ์
+    MUI->>USR: 4.1 ส่งข้อมูลผู้ใช้ (แก้ไข Role/สิทธิ์)
+    USR->>DB: 4.1.1 บันทึกข้อมูลสิทธิ์ผู้ใช้งาน
+    DB-->>USR: 4.1.2 ยืนยันการเปลี่ยนแปลงสิทธิ์
+    USR-->>MUI: 4.2 แสดงผลอัปเดตผู้ใช้สำเร็จ
 ```
 
 ---
 
-## 6. Wireframe
+## 7. Wireframe และ Prototype
 
-*(ระบุลิงก์ Figma หรือแทรกรูปภาพ Wireframe ของคุณที่นี่)*
+**Figma Design & Prototype:** [PC-Center Figma](https://www.figma.com/design/IYlNf0A4R423lRC0onIuXK/PC-Center?node-id=0-1&t=R5KfjKv478bxXQKn-1)
+
 
 ---
 
-## 7. System Architecture
+## 8. System Architecture
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#dce6f5', 'primaryTextColor': '#333', 'primaryBorderColor': '#7b9fd4', 'lineColor': '#666', 'background': '#ffffff', 'mainBkg': '#ffffff'}}}%%
@@ -703,6 +645,7 @@ flowchart TB
         direction LR
         NEXT["Next.js (React)\nFrontend"]
         TW["Tailwind CSS\nshadcn/ui"]
+        LS["LocalStorage\n(State/Cart)"]
     end
 
     subgraph Server["⚙️ Server (Next.js API Routes)"]
@@ -714,8 +657,7 @@ flowchart TB
 
     subgraph Data["💾 Data Layer"]
         direction LR
-        LS["LocalStorage\n(Browser)"]
-        MOCK["Mock Data\n(JSON)"]
+        MOCK["Mock Data\n(JSON Files)"]
     end
 
     subgraph Roles["👥 User Roles"]
@@ -729,14 +671,14 @@ flowchart TB
     Client --> Server
     Server --> Data
     NEXT --- TW
+    NEXT -.-> LS
     API --- AUTH
     AUTH --- RBAC
-    LS --- MOCK
 ```
 
 ---
 
-## 8. Tools & Technologies
+## 9. Tools & Technologies
 
 * **Frontend Framework:** Next.js (React), TypeScript
 * **Styling & UI:** Tailwind CSS, shadcn/ui, Lucide React
@@ -746,7 +688,7 @@ flowchart TB
 
 ---
 
-## 9. Data Schema (JSON)
+## 10. Data Schema (JSON)
 
 **👤 User**
 ```json
@@ -769,12 +711,29 @@ flowchart TB
 }
 ```
 
+**🏷️ Product Item (Warranty)**
+```json
+{
+  "item_id": 101,
+  "product_id": 1,
+  "serial_number": "SN-123456789",
+  "warranty": "1 Year",
+  "status": "Available"
+}
+```
+
 **🛒 Cart**
 ```json
 {
   "cart_id": 1,
   "user_id": 1,
-  "items": []
+  "items": [
+    {
+      "product_id": 1,
+      "quantity": 2,
+      "price": 599
+    }
+  ]
 }
 ```
 
@@ -783,11 +742,15 @@ flowchart TB
 {
   "order_id": 1,
   "user_id": 1,
-  "total_price": 599,
-  "status": "pending"
+  "items": [
+    {
+      "product_id": 1,
+      "quantity": 2,
+      "unit_price": 599
+    }
+  ],
+  "total_price": 1198,
+  "status": "pending",
+  "created_at": "2024-10-25T10:00:00Z"
 }
 ```
-
----
-
-## 10. Progress Report

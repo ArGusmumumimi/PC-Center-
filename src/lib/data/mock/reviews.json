@@ -1,0 +1,47 @@
+[
+  {
+    "id": "rev_001",
+    "userId": "usr_003",
+    "productId": "prod_005",
+    "rating": 5,
+    "comment": "การ์ดจอแรงมากครับ เล่นเกมได้ทุกเกม 4K Ultra ลื่นหมด",
+    "userName": "สมหญิง ลูกค้า",
+    "createdAt": "2025-03-10T12:00:00Z"
+  },
+  {
+    "id": "rev_002",
+    "userId": "usr_004",
+    "productId": "prod_001",
+    "rating": 5,
+    "comment": "CPU ตัวท็อป ประมวลผลเร็วมาก ทำงาน Render ลดเวลาไปเยอะ",
+    "userName": "John Gamer",
+    "createdAt": "2025-04-20T18:30:00Z"
+  },
+  {
+    "id": "rev_003",
+    "userId": "usr_003",
+    "productId": "prod_009",
+    "rating": 4,
+    "comment": "แรมดีครับ ไฟ RGB สวย แต่ราคาค่อนข้างสูง",
+    "userName": "สมหญิง ลูกค้า",
+    "createdAt": "2025-03-12T09:00:00Z"
+  },
+  {
+    "id": "rev_004",
+    "userId": "usr_004",
+    "productId": "prod_015",
+    "rating": 5,
+    "comment": "เมนบอร์ดคุณภาพดี BIOS ใช้งานง่าย OC ได้ดี",
+    "userName": "John Gamer",
+    "createdAt": "2025-04-25T14:00:00Z"
+  },
+  {
+    "id": "rev_005",
+    "userId": "usr_003",
+    "productId": "prod_012",
+    "rating": 5,
+    "comment": "SSD เร็วมาก โอนไฟล์ใหญ่ไม่มีสะดุด",
+    "userName": "สมหญิง ลูกค้า",
+    "createdAt": "2025-04-01T10:00:00Z"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "usr_001",
+    "email": "admin@pccenter.com",
+    "password": "hash_39c43b7d",
+    "name": "Admin Manager",
+    "phone": "0891234567",
+    "address": "99 ถ.รัชดาภิเษก แขวงดินแดง เขตดินแดง กรุงเทพฯ 10400",
+    "role": "manager",
+    "avatar": "/avatars/manager.png",
+    "createdAt": "2025-01-01T00:00:00Z",
+    "updatedAt": "2025-01-01T00:00:00Z"
+  },
+  {
+    "id": "usr_002",
+    "email": "staff@pccenter.com",
+    "password": "hash_4dcc8f52",
+    "name": "สมชาย พนักงาน",
+    "phone": "0892345678",
+    "address": "55 ถ.พหลโยธิน แขวงจตุจักร เขตจตุจักร กรุงเทพฯ 10900",
+    "role": "staff",
+    "avatar": "/avatars/staff.png",
+    "createdAt": "2025-01-15T00:00:00Z",
+    "updatedAt": "2025-01-15T00:00:00Z"
+  },
+  {
+    "id": "usr_003",
+    "email": "customer@pccenter.com",
+    "password": "hash_69a0366c",
+    "name": "สมหญิง ลูกค้า",
+    "phone": "0893456789",
+    "address": "123 ถ.สุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพฯ 10110",
+    "role": "customer",
+    "avatar": "/avatars/customer.png",
+    "createdAt": "2025-02-01T00:00:00Z",
+    "updatedAt": "2025-02-01T00:00:00Z"
+  },
+  {
+    "id": "usr_004",
+    "email": "john@example.com",
+    "password": "hash_55529833",
+    "name": "John Gamer",
+    "phone": "0894567890",
+    "address": "456 ถ.ลาดพร้าว แขวงลาดพร้าว เขตลาดพร้าว กรุงเทพฯ 10230",
+    "role": "customer",
+    "avatar": "/avatars/customer.png",
+    "createdAt": "2025-03-10T00:00:00Z",
+    "updatedAt": "2025-03-10T00:00:00Z"
+  }
+]

@@ -1,0 +1,150 @@
+[
+  {
+    "id": "ord_001",
+    "userId": "usr_003",
+    "items": [
+      {
+        "productId": "prod_005",
+        "name": "NVIDIA GeForce RTX 5090",
+        "price": 89900,
+        "quantity": 1,
+        "image": "/products/rtx5090.jpg"
+      },
+      {
+        "productId": "prod_009",
+        "name": "G.Skill Trident Z5 RGB DDR5 32GB",
+        "price": 5490,
+        "quantity": 2,
+        "image": "/products/gskill-trident-z5.jpg"
+      }
+    ],
+    "subtotal": 100880,
+    "shipping": 0,
+    "discount": 0,
+    "total": 100880,
+    "status": "delivered",
+    "shippingAddress": {
+      "name": "สมหญิง ลูกค้า",
+      "phone": "0893456789",
+      "address": "123 ถ.สุขุมวิท กรุงเทพฯ"
+    },
+    "paymentMethod": "credit_card",
+    "paymentStatus": "paid",
+    "trackingNumber": "TH20250301001",
+    "promoCode": "",
+    "notes": "",
+    "createdAt": "2025-03-01T10:30:00Z",
+    "updatedAt": "2025-03-05T15:00:00Z"
+  },
+  {
+    "id": "ord_002",
+    "userId": "usr_004",
+    "items": [
+      {
+        "productId": "prod_001",
+        "name": "AMD Ryzen 9 9950X",
+        "price": 25900,
+        "quantity": 1,
+        "image": "/products/ryzen9-9950x.jpg"
+      },
+      {
+        "productId": "prod_015",
+        "name": "ASUS ROG Crosshair X870E Hero",
+        "price": 24900,
+        "quantity": 1,
+        "image": "/products/asus-x870e.jpg"
+      },
+      {
+        "productId": "prod_017",
+        "name": "Corsair RM1000x 1000W",
+        "price": 6490,
+        "quantity": 1,
+        "image": "/products/corsair-rm1000x.jpg"
+      }
+    ],
+    "subtotal": 57290,
+    "shipping": 0,
+    "discount": 5729,
+    "total": 51561,
+    "status": "shipped",
+    "shippingAddress": {
+      "name": "John Gamer",
+      "phone": "0894567890",
+      "address": "456 ถ.ลาดพร้าว กรุงเทพฯ"
+    },
+    "paymentMethod": "bank_transfer",
+    "paymentStatus": "paid",
+    "trackingNumber": "TH20250415002",
+    "promoCode": "SUMMER2025",
+    "notes": "ส่งวันเสาร์ได้ครับ",
+    "createdAt": "2025-04-15T14:20:00Z",
+    "updatedAt": "2025-04-18T09:00:00Z"
+  },
+  {
+    "id": "ord_003",
+    "userId": "usr_003",
+    "items": [
+      {
+        "productId": "prod_023",
+        "name": "Logitech G Pro X TKL Rapid",
+        "price": 6490,
+        "quantity": 1,
+        "image": "/products/logitech-gpro-tkl.jpg"
+      },
+      {
+        "productId": "prod_024",
+        "name": "Razer DeathAdder V3 Pro",
+        "price": 4490,
+        "quantity": 1,
+        "image": "/products/razer-deathadder-v3.jpg"
+      }
+    ],
+    "subtotal": 10980,
+    "shipping": 50,
+    "discount": 0,
+    "total": 11030,
+    "status": "processing",
+    "shippingAddress": {
+      "name": "สมหญิง ลูกค้า",
+      "phone": "0893456789",
+      "address": "123 ถ.สุขุมวิท กรุงเทพฯ"
+    },
+    "paymentMethod": "cod",
+    "paymentStatus": "pending",
+    "trackingNumber": "",
+    "promoCode": "",
+    "notes": "",
+    "createdAt": "2025-05-20T09:15:00Z",
+    "updatedAt": "2025-05-20T09:15:00Z"
+  },
+  {
+    "id": "ord_004",
+    "userId": "usr_004",
+    "items": [
+      {
+        "productId": "prod_021",
+        "name": "Samsung Odyssey OLED G8 32\"",
+        "price": 34900,
+        "quantity": 1,
+        "image": "/products/samsung-g8-oled.jpg"
+      }
+    ],
+    "subtotal": 34900,
+    "shipping": 0,
+    "discount": 0,
+    "total": 34900,
+    "status": "pending",
+    "shippingAddress": {
+      "name": "John Gamer",
+      "phone": "0894567890",
+      "address": "456 ถ.ลาดพร้าว กรุงเทพฯ"
+    },
+    "paymentMethod": "credit_card",
+    "paymentStatus": "pending",
+    "trackingNumber": "",
+    "promoCode": "",
+    "notes": "ต้องการใบกำกับภาษี",
+    "createdAt": "2025-06-01T16:45:00Z",
+    "updatedAt": "2025-06-01T16:45:00Z"
+  }
+]

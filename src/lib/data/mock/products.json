@@ -1,0 +1,681 @@
+[
+  {
+    "id": "prod_001",
+    "name": "AMD Ryzen 9 9950X",
+    "slug": "amd-ryzen-9-9950x",
+    "description": "โปรเซสเซอร์ AMD Ryzen 9 9950X 16 Cores 32 Threads ความเร็ว Boost สูงสุด 5.7GHz สถาปัตยกรรม Zen 5 รองรับ DDR5 และ PCIe 5.0 เหมาะสำหรับงาน Content Creation และ Gaming ระดับ Enthusiast",
+    "price": 25900,
+    "comparePrice": 28900,
+    "category": "cpu",
+    "brand": "AMD",
+    "images": [
+      "/products/ryzen9-9950x.jpg"
+    ],
+    "specs": {
+      "cores": "16 Cores / 32 Threads",
+      "base_clock": "4.3 GHz",
+      "boost_clock": "5.7 GHz",
+      "cache": "80MB",
+      "tdp": "170W",
+      "socket": "AM5"
+    },
+    "stock": 12,
+    "rating": 4.9,
+    "reviewCount": 89,
+    "featured": true,
+    "status": "active",
+    "createdAt": "2025-01-10T00:00:00Z"
+  },
+  {
+    "id": "prod_002",
+    "name": "Intel Core Ultra 9 285K",
+    "slug": "intel-core-ultra-9-285k",
+    "description": "โปรเซสเซอร์ Intel Core Ultra 9 285K 24 Cores (8P+16E) สถาปัตยกรรม Arrow Lake รองรับ DDR5 และ PCIe 5.0 มาพร้อม NPU สำหรับ AI Workload",
+    "price": 23500,
+    "comparePrice": 25900,
+    "category": "cpu",
+    "brand": "Intel",
+    "images": [
+      "/products/intel-ultra9.jpg"
+    ],
+    "specs": {
+      "cores": "24 Cores (8P+16E)",
+      "boost_clock": "5.7 GHz",
+      "cache": "36MB",
+      "tdp": "125W",
+      "socket": "LGA1851"
+    },
+    "stock": 8,
+    "rating": 4.7,
+    "reviewCount": 56,
+    "featured": true,
+    "status": "active",
+    "createdAt": "2025-01-12T00:00:00Z"
+  },
+  {
+    "id": "prod_003",
+    "name": "AMD Ryzen 7 9700X",
+    "slug": "amd-ryzen-7-9700x",
+    "description": "โปรเซสเซอร์ AMD Ryzen 7 9700X 8 Cores 16 Threads ประสิทธิภาพสูงในราคาที่คุ้มค่า เหมาะสำหรับ Gaming และทำงานทั่วไป",
+    "price": 14500,
+    "comparePrice": 16900,
+    "category": "cpu",
+    "brand": "AMD",
+    "images": [
+      "/products/ryzen7-9700x.jpg"
+    ],
+    "specs": {
+      "cores": "8 Cores / 16 Threads",
+      "boost_clock": "5.5 GHz",
+      "cache": "40MB",
+      "tdp": "65W",
+      "socket": "AM5"
+    },
+    "stock": 20,
+    "rating": 4.8,
+    "reviewCount": 142,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-01-15T00:00:00Z"
+  },
+  {
+    "id": "prod_004",
+    "name": "Intel Core i5-14600K",
+    "slug": "intel-core-i5-14600k",
+    "description": "โปรเซสเซอร์ Intel Core i5-14600K 14 Cores ราคาประหยัดสำหรับ Mainstream Gaming",
+    "price": 10900,
+    "comparePrice": 12500,
+    "category": "cpu",
+    "brand": "Intel",
+    "images": [
+      "/products/intel-i5-14600k.jpg"
+    ],
+    "specs": {
+      "cores": "14 Cores (6P+8E)",
+      "boost_clock": "5.3 GHz",
+      "cache": "24MB",
+      "tdp": "125W",
+      "socket": "LGA1700"
+    },
+    "stock": 25,
+    "rating": 4.6,
+    "reviewCount": 210,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-01-20T00:00:00Z"
+  },
+  {
+    "id": "prod_005",
+    "name": "NVIDIA GeForce RTX 5090",
+    "slug": "nvidia-rtx-5090",
+    "description": "กราฟิกการ์ดระดับ Flagship ประสิทธิภาพสูงสุด มาพร้อมหน่วยความจำ 32GB GDDR7 สถาปัตยกรรม Blackwell รองรับ DLSS 4 และ Ray Tracing ขั้นสูง",
+    "price": 89900,
+    "comparePrice": 95000,
+    "category": "gpu",
+    "brand": "NVIDIA",
+    "images": [
+      "/products/rtx5090.jpg"
+    ],
+    "specs": {
+      "memory": "32GB GDDR7",
+      "cores": "21760 CUDA Cores",
+      "boost_clock": "2407 MHz",
+      "tdp": "575W",
+      "interface": "PCIe 5.0 x16"
+    },
+    "stock": 5,
+    "rating": 4.9,
+    "reviewCount": 34,
+    "featured": true,
+    "status": "active",
+    "createdAt": "2025-02-01T00:00:00Z"
+  },
+  {
+    "id": "prod_006",
+    "name": "NVIDIA GeForce RTX 5070 Ti",
+    "slug": "nvidia-rtx-5070-ti",
+    "description": "กราฟิกการ์ดระดับ High-end คุ้มค่า มาพร้อม 16GB GDDR7 ประสิทธิภาพเทียบเท่า RTX 4090 ในราคาที่ถูกกว่า",
+    "price": 34900,
+    "comparePrice": 37900,
+    "category": "gpu",
+    "brand": "NVIDIA",
+    "images": [
+      "/products/rtx5070ti.jpg"
+    ],
+    "specs": {
+      "memory": "16GB GDDR7",
+      "cores": "8960 CUDA Cores",
+      "boost_clock": "2452 MHz",
+      "tdp": "300W",
+      "interface": "PCIe 5.0 x16"
+    },
+    "stock": 10,
+    "rating": 4.8,
+    "reviewCount": 78,
+    "featured": true,
+    "status": "active",
+    "createdAt": "2025-02-05T00:00:00Z"
+  },
+  {
+    "id": "prod_007",
+    "name": "AMD Radeon RX 9070 XT",
+    "slug": "amd-radeon-rx-9070-xt",
+    "description": "กราฟิกการ์ด AMD สถาปัตยกรรม RDNA 4 มาพร้อม 16GB GDDR6 ราคาคุ้มค่า",
+    "price": 22900,
+    "comparePrice": 24900,
+    "category": "gpu",
+    "brand": "AMD",
+    "images": [
+      "/products/rx9070xt.jpg"
+    ],
+    "specs": {
+      "memory": "16GB GDDR6",
+      "cores": "4096 Stream Processors",
+      "boost_clock": "2850 MHz",
+      "tdp": "250W",
+      "interface": "PCIe 4.0 x16"
+    },
+    "stock": 15,
+    "rating": 4.6,
+    "reviewCount": 92,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-02-10T00:00:00Z"
+  },
+  {
+    "id": "prod_008",
+    "name": "NVIDIA GeForce RTX 5060",
+    "slug": "nvidia-rtx-5060",
+    "description": "กราฟิกการ์ดระดับ Mainstream สำหรับเล่นเกม 1080p/1440p อย่างลื่นไหล",
+    "price": 14900,
+    "comparePrice": 16500,
+    "category": "gpu",
+    "brand": "NVIDIA",
+    "images": [
+      "/products/rtx5060.jpg"
+    ],
+    "specs": {
+      "memory": "8GB GDDR7",
+      "cores": "4608 CUDA Cores",
+      "boost_clock": "2573 MHz",
+      "tdp": "150W",
+      "interface": "PCIe 5.0 x8"
+    },
+    "stock": 30,
+    "rating": 4.5,
+    "reviewCount": 156,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-02-15T00:00:00Z"
+  },
+  {
+    "id": "prod_009",
+    "name": "G.Skill Trident Z5 RGB DDR5 32GB (2x16GB) 6400MHz",
+    "slug": "gskill-trident-z5-rgb-ddr5-32gb",
+    "description": "แรม DDR5 ประสิทธิภาพสูง พร้อมไฟ RGB สวยงาม CL32 เหมาะสำหรับระบบ High-end",
+    "price": 5490,
+    "comparePrice": 6290,
+    "category": "ram",
+    "brand": "G.Skill",
+    "images": [
+      "/products/gskill-trident-z5.jpg"
+    ],
+    "specs": {
+      "capacity": "32GB (2x16GB)",
+      "type": "DDR5",
+      "speed": "6400MHz",
+      "latency": "CL32",
+      "voltage": "1.4V"
+    },
+    "stock": 40,
+    "rating": 4.8,
+    "reviewCount": 200,
+    "featured": true,
+    "status": "active",
+    "createdAt": "2025-03-01T00:00:00Z"
+  },
+  {
+    "id": "prod_010",
+    "name": "Kingston Fury Beast DDR5 32GB (2x16GB) 5600MHz",
+    "slug": "kingston-fury-beast-ddr5-32gb",
+    "description": "แรม DDR5 สำหรับ Gaming ราคาคุ้มค่า ดีไซน์ Heatspreader ระบายความร้อนได้ดี",
+    "price": 3290,
+    "comparePrice": 3990,
+    "category": "ram",
+    "brand": "Kingston",
+    "images": [
+      "/products/kingston-fury.jpg"
+    ],
+    "specs": {
+      "capacity": "32GB (2x16GB)",
+      "type": "DDR5",
+      "speed": "5600MHz",
+      "latency": "CL36",
+      "voltage": "1.25V"
+    },
+    "stock": 50,
+    "rating": 4.6,
+    "reviewCount": 310,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-03-05T00:00:00Z"
+  },
+  {
+    "id": "prod_011",
+    "name": "Corsair Vengeance DDR5 64GB (2x32GB) 6000MHz",
+    "slug": "corsair-vengeance-ddr5-64gb",
+    "description": "แรม DDR5 ความจุสูง 64GB เหมาะสำหรับ Workstation และ Content Creation",
+    "price": 7890,
+    "comparePrice": 8990,
+    "category": "ram",
+    "brand": "Corsair",
+    "images": [
+      "/products/corsair-vengeance.jpg"
+    ],
+    "specs": {
+      "capacity": "64GB (2x32GB)",
+      "type": "DDR5",
+      "speed": "6000MHz",
+      "latency": "CL30",
+      "voltage": "1.35V"
+    },
+    "stock": 15,
+    "rating": 4.7,
+    "reviewCount": 88,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-03-10T00:00:00Z"
+  },
+  {
+    "id": "prod_012",
+    "name": "Samsung 990 Pro 2TB NVMe SSD",
+    "slug": "samsung-990-pro-2tb",
+    "description": "SSD NVMe Gen 4 ความเร็วสูง อ่าน 7,450 MB/s เขียน 6,900 MB/s พร้อม Heatsink",
+    "price": 6290,
+    "comparePrice": 7490,
+    "category": "storage",
+    "brand": "Samsung",
+    "images": [
+      "/products/samsung-990pro.jpg"
+    ],
+    "specs": {
+      "capacity": "2TB",
+      "interface": "PCIe 4.0 NVMe",
+      "read": "7,450 MB/s",
+      "write": "6,900 MB/s",
+      "form_factor": "M.2 2280"
+    },
+    "stock": 35,
+    "rating": 4.9,
+    "reviewCount": 420,
+    "featured": true,
+    "status": "active",
+    "createdAt": "2025-03-15T00:00:00Z"
+  },
+  {
+    "id": "prod_013",
+    "name": "WD Black SN850X 1TB NVMe SSD",
+    "slug": "wd-black-sn850x-1tb",
+    "description": "SSD NVMe Gen 4 สำหรับ Gaming ความเร็วสูง มาพร้อม Game Mode 2.0",
+    "price": 3190,
+    "comparePrice": 3790,
+    "category": "storage",
+    "brand": "Western Digital",
+    "images": [
+      "/products/wd-sn850x.jpg"
+    ],
+    "specs": {
+      "capacity": "1TB",
+      "interface": "PCIe 4.0 NVMe",
+      "read": "7,300 MB/s",
+      "write": "6,300 MB/s",
+      "form_factor": "M.2 2280"
+    },
+    "stock": 45,
+    "rating": 4.7,
+    "reviewCount": 356,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-03-20T00:00:00Z"
+  },
+  {
+    "id": "prod_014",
+    "name": "Crucial T700 2TB Gen5 NVMe SSD",
+    "slug": "crucial-t700-2tb-gen5",
+    "description": "SSD NVMe Gen 5 เร็วที่สุดในท้องตลาด อ่านสูงสุด 12,400 MB/s",
+    "price": 9990,
+    "comparePrice": 11900,
+    "category": "storage",
+    "brand": "Crucial",
+    "images": [
+      "/products/crucial-t700.jpg"
+    ],
+    "specs": {
+      "capacity": "2TB",
+      "interface": "PCIe 5.0 NVMe",
+      "read": "12,400 MB/s",
+      "write": "11,800 MB/s",
+      "form_factor": "M.2 2280"
+    },
+    "stock": 8,
+    "rating": 4.6,
+    "reviewCount": 45,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-04-01T00:00:00Z"
+  },
+  {
+    "id": "prod_015",
+    "name": "ASUS ROG Crosshair X870E Hero",
+    "slug": "asus-rog-crosshair-x870e-hero",
+    "description": "เมนบอร์ด AM5 ระดับ Enthusiast รองรับ DDR5 และ PCIe 5.0 พร้อม WiFi 7",
+    "price": 24900,
+    "comparePrice": 27900,
+    "category": "motherboard",
+    "brand": "ASUS",
+    "images": [
+      "/products/asus-x870e.jpg"
+    ],
+    "specs": {
+      "chipset": "AMD X870E",
+      "socket": "AM5",
+      "memory": "DDR5 8000MHz+",
+      "pcie": "PCIe 5.0",
+      "wifi": "WiFi 7",
+      "form_factor": "ATX"
+    },
+    "stock": 6,
+    "rating": 4.8,
+    "reviewCount": 67,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-04-05T00:00:00Z"
+  },
+  {
+    "id": "prod_016",
+    "name": "MSI MPG Z890 Carbon WiFi",
+    "slug": "msi-mpg-z890-carbon-wifi",
+    "description": "เมนบอร์ด Intel LGA1851 รุ่น Premium พร้อม WiFi 7 และ Thunderbolt 4",
+    "price": 16900,
+    "comparePrice": 18900,
+    "category": "motherboard",
+    "brand": "MSI",
+    "images": [
+      "/products/msi-z890.jpg"
+    ],
+    "specs": {
+      "chipset": "Intel Z890",
+      "socket": "LGA1851",
+      "memory": "DDR5 7800MHz+",
+      "pcie": "PCIe 5.0",
+      "wifi": "WiFi 7",
+      "form_factor": "ATX"
+    },
+    "stock": 10,
+    "rating": 4.7,
+    "reviewCount": 89,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-04-10T00:00:00Z"
+  },
+  {
+    "id": "prod_017",
+    "name": "Corsair RM1000x 1000W 80+ Gold",
+    "slug": "corsair-rm1000x",
+    "description": "พาวเวอร์ซัพพลาย 1000W 80+ Gold Fully Modular เงียบเป็นพิเศษ",
+    "price": 6490,
+    "comparePrice": 7290,
+    "category": "psu",
+    "brand": "Corsair",
+    "images": [
+      "/products/corsair-rm1000x.jpg"
+    ],
+    "specs": {
+      "wattage": "1000W",
+      "efficiency": "80+ Gold",
+      "modular": "Fully Modular",
+      "fan": "135mm",
+      "warranty": "10 ปี"
+    },
+    "stock": 20,
+    "rating": 4.8,
+    "reviewCount": 234,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-04-15T00:00:00Z"
+  },
+  {
+    "id": "prod_018",
+    "name": "Seasonic PRIME TX-1600 1600W 80+ Titanium",
+    "slug": "seasonic-prime-tx-1600",
+    "description": "พาวเวอร์ซัพพลายระดับ Flagship 1600W 80+ Titanium สำหรับระบบ Ultra High-end",
+    "price": 18900,
+    "comparePrice": 21900,
+    "category": "psu",
+    "brand": "Seasonic",
+    "images": [
+      "/products/seasonic-tx1600.jpg"
+    ],
+    "specs": {
+      "wattage": "1600W",
+      "efficiency": "80+ Titanium",
+      "modular": "Fully Modular",
+      "fan": "135mm FDB",
+      "warranty": "12 ปี"
+    },
+    "stock": 4,
+    "rating": 4.9,
+    "reviewCount": 28,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-04-20T00:00:00Z"
+  },
+  {
+    "id": "prod_019",
+    "name": "Lian Li O11 Dynamic EVO",
+    "slug": "lian-li-o11-dynamic-evo",
+    "description": "เคสคอมพิวเตอร์ยอดนิยม ดีไซน์สวยรองรับ Custom Loop Cooling",
+    "price": 6990,
+    "comparePrice": 7990,
+    "category": "case",
+    "brand": "Lian Li",
+    "images": [
+      "/products/lianli-o11.jpg"
+    ],
+    "specs": {
+      "form_factor": "Mid Tower",
+      "motherboard": "E-ATX/ATX/mATX",
+      "fans": "สูงสุด 10 ตัว",
+      "material": "Aluminum + Glass",
+      "dimensions": "465 x 285 x 459mm"
+    },
+    "stock": 18,
+    "rating": 4.8,
+    "reviewCount": 567,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-05-01T00:00:00Z"
+  },
+  {
+    "id": "prod_020",
+    "name": "NZXT H9 Flow",
+    "slug": "nzxt-h9-flow",
+    "description": "เคส Full Tower กระจกใส 4 ด้าน Airflow เยี่ยม",
+    "price": 7490,
+    "comparePrice": 8490,
+    "category": "case",
+    "brand": "NZXT",
+    "images": [
+      "/products/nzxt-h9.jpg"
+    ],
+    "specs": {
+      "form_factor": "Full Tower",
+      "motherboard": "E-ATX/ATX/mATX/ITX",
+      "fans": "รวม 4 ตัว / สูงสุด 10",
+      "material": "Steel + Glass",
+      "dimensions": "520 x 280 x 510mm"
+    },
+    "stock": 12,
+    "rating": 4.7,
+    "reviewCount": 189,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-05-05T00:00:00Z"
+  },
+  {
+    "id": "prod_021",
+    "name": "Samsung Odyssey OLED G8 32\" 4K 240Hz",
+    "slug": "samsung-odyssey-oled-g8-32",
+    "description": "จอมอนิเตอร์ OLED 32 นิ้ว 4K 240Hz ความสว่างสูง HDR True Black",
+    "price": 34900,
+    "comparePrice": 39900,
+    "category": "monitor",
+    "brand": "Samsung",
+    "images": [
+      "/products/samsung-g8-oled.jpg"
+    ],
+    "specs": {
+      "size": "32\"",
+      "resolution": "4K (3840x2160)",
+      "panel": "QD-OLED",
+      "refresh_rate": "240Hz",
+      "response_time": "0.03ms"
+    },
+    "stock": 7,
+    "rating": 4.9,
+    "reviewCount": 112,
+    "featured": true,
+    "status": "active",
+    "createdAt": "2025-05-10T00:00:00Z"
+  },
+  {
+    "id": "prod_022",
+    "name": "LG UltraGear 27GR95QE 27\" QHD OLED 240Hz",
+    "slug": "lg-ultragear-27gr95qe",
+    "description": "จอมอนิเตอร์ OLED 27 นิ้ว QHD 240Hz สีสดจัดจ้าน เหมาะสำหรับ Esports",
+    "price": 24900,
+    "comparePrice": 28900,
+    "category": "monitor",
+    "brand": "LG",
+    "images": [
+      "/products/lg-27gr95qe.jpg"
+    ],
+    "specs": {
+      "size": "27\"",
+      "resolution": "QHD (2560x1440)",
+      "panel": "OLED",
+      "refresh_rate": "240Hz",
+      "response_time": "0.03ms"
+    },
+    "stock": 10,
+    "rating": 4.8,
+    "reviewCount": 198,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-05-15T00:00:00Z"
+  },
+  {
+    "id": "prod_023",
+    "name": "Logitech G Pro X TKL Rapid",
+    "slug": "logitech-g-pro-x-tkl-rapid",
+    "description": "คีย์บอร์ด Mechanical Gaming ขนาด TKL สวิตช์ Magnetic (Hall Effect) ปรับ Actuation Point ได้",
+    "price": 6490,
+    "comparePrice": 6990,
+    "category": "peripherals",
+    "brand": "Logitech",
+    "images": [
+      "/products/logitech-gpro-tkl.jpg"
+    ],
+    "specs": {
+      "type": "Mechanical (Hall Effect)",
+      "layout": "TKL (80%)",
+      "connection": "Wireless / USB-C",
+      "switch": "Magnetic Analog",
+      "polling_rate": "4000Hz"
+    },
+    "stock": 25,
+    "rating": 4.7,
+    "reviewCount": 145,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-06-01T00:00:00Z"
+  },
+  {
+    "id": "prod_024",
+    "name": "Razer DeathAdder V3 Pro",
+    "slug": "razer-deathadder-v3-pro",
+    "description": "เมาส์ Gaming ไร้สาย น้ำหนักเบา 63g เซ็นเซอร์ Focus Pro 36K",
+    "price": 4490,
+    "comparePrice": 4990,
+    "category": "peripherals",
+    "brand": "Razer",
+    "images": [
+      "/products/razer-deathadder-v3.jpg"
+    ],
+    "specs": {
+      "sensor": "Focus Pro 36K",
+      "dpi": "36,000",
+      "weight": "63g",
+      "connection": "Wireless (HyperSpeed)",
+      "battery": "90 ชั่วโมง"
+    },
+    "stock": 30,
+    "rating": 4.8,
+    "reviewCount": 289,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-06-05T00:00:00Z"
+  },
+  {
+    "id": "prod_025",
+    "name": "SteelSeries Arctis Nova Pro Wireless",
+    "slug": "steelseries-arctis-nova-pro-wireless",
+    "description": "หูฟัง Gaming ไร้สาย ระบบ Active Noise Cancellation เสียงระดับ Hi-Fi",
+    "price": 12900,
+    "comparePrice": 14900,
+    "category": "audio",
+    "brand": "SteelSeries",
+    "images": [
+      "/products/steelseries-arctis-nova-pro.jpg"
+    ],
+    "specs": {
+      "driver": "40mm Neodymium",
+      "frequency": "10-40,000Hz",
+      "anc": "Active Noise Cancellation",
+      "connection": "2.4GHz + Bluetooth",
+      "battery": "44 ชั่วโมง (รวม 2 แบต)"
+    },
+    "stock": 15,
+    "rating": 4.8,
+    "reviewCount": 178,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-06-10T00:00:00Z"
+  },
+  {
+    "id": "prod_026",
+    "name": "HyperX Cloud III Wireless",
+    "slug": "hyperx-cloud-iii-wireless",
+    "description": "หูฟัง Gaming ไร้สาย เสียงรอบทิศทาง DTS Headphone:X ราคาคุ้มค่า",
+    "price": 4990,
+    "comparePrice": 5690,
+    "category": "audio",
+    "brand": "HyperX",
+    "images": [
+      "/products/hyperx-cloud3.jpg"
+    ],
+    "specs": {
+      "driver": "53mm",
+      "frequency": "10-21,000Hz",
+      "connection": "2.4GHz Wireless",
+      "battery": "120 ชั่วโมง",
+      "surround": "DTS Headphone:X"
+    },
+    "stock": 35,
+    "rating": 4.6,
+    "reviewCount": 345,
+    "featured": false,
+    "status": "active",
+    "createdAt": "2025-06-15T00:00:00Z"
+  }
+]

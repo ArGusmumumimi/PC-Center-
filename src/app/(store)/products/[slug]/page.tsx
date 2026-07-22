@@ -8,7 +8,6 @@ import {
   Minus, Plus
 } from "lucide-react";
 import type { Product, Review } from "@/lib/data/schema";
-import { ProductStore, ReviewStore } from "@/lib/data/store";
 import { formatPrice, formatShortDate } from "@/lib/format";
 import { useCart } from "@/contexts/cart-context";
 import { useAuth } from "@/contexts/auth-context";
@@ -16,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import Image from "next/image";
 
@@ -31,34 +31,81 @@ export default function ProductDetailPage() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  
+
+  const [reviewRating, setReviewRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [reviewComment, setReviewComment] = useState("");
+  const [submittingReview, setSubmittingReview] = useState(false);
+
   const isCustomer = isAuthenticated && session?.role === "customer";
 
-  useEffect(() => {
-    const fetchProductAndReviews = async () => {
-      if (slug) {
-        try {
-          const res = await fetch(`/api/products/${slug}`);
-          const data = await res.json();
-          if (data.success) {
-            setProduct(data.data);
-            
-            // For reviews, we can fetch from API if we have an endpoint, 
-            // but since we haven't created /api/reviews yet, 
-            // I'll keep ReviewStore.getByProductId for reviews for now, 
-            // or I can create a reviews API later. Actually, the assignment focuses on product, order, users.
-            // Let's use local storage for reviews just so it doesn't break.
-            setReviews(ReviewStore.getByProductId(data.data.id));
-          }
-        } catch (e) {
-          console.error(e);
-        } finally {
-          setLoading(false);
-        }
+  const loadProductAndReviews = async () => {
+    if (!slug) return;
+    try {
+      const res = await fetch(`/api/products/${slug}`);
+      const data = await res.json();
+      if (data.success) {
+        setProduct(data.data);
+        const reviewsRes = await fetch(`/api/reviews?productId=${data.data.id}`);
+        const reviewsData = await reviewsRes.json();
+        if (reviewsData.success) setReviews(reviewsData.data);
       }
-    };
-    fetchProductAndReviews();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProductAndReviews();
   }, [slug]);
+
+  const handleSubmitReview = async () => {
+    if (!isCustomer || !session) {
+      toast.error("กรุณาเข้าสู่ระบบในฐานะลูกค้าเพื่อเขียนรีวิว");
+      router.push("/login");
+      return;
+    }
+    if (reviewRating < 1 || reviewRating > 5) {
+      toast.error("กรุณาเลือกคะแนนรีวิว");
+      return;
+    }
+    if (!reviewComment.trim()) {
+      toast.error("กรุณากรอกความคิดเห็น");
+      return;
+    }
+
+    setSubmittingReview(true);
+    try {
+      const res = await fetch("/api/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.token}`,
+        },
+        body: JSON.stringify({
+          productId: product!.id,
+          rating: reviewRating,
+          comment: reviewComment.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("ขอบคุณสำหรับรีวิวของคุณ");
+        setReviewRating(0);
+        setReviewComment("");
+        await loadProductAndReviews();
+      } else {
+        toast.error(data.error || "ไม่สามารถส่งรีวิวได้");
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error("เกิดข้อผิดพลาด กรุณาลองใหม่");
+    } finally {
+      setSubmittingReview(false);
+    }
+  };
 
   if (loading) {
     return <div className="container py-24 text-center">กำลังโหลดข้อมูลสินค้า...</div>;
@@ -254,6 +301,51 @@ export default function ProductDetailPage() {
         </TabsContent>
         
         <TabsContent value="reviews" className="pt-6">
+          <div className="max-w-4xl mb-8 border rounded-lg p-6 bg-muted/20">
+            <h3 className="font-semibold mb-4">เขียนรีวิวสินค้านี้</h3>
+            {isCustomer ? (
+              <div className="space-y-4">
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setReviewRating(star)}
+                      onMouseEnter={() => setHoverRating(star)}
+                      onMouseLeave={() => setHoverRating(0)}
+                      className="p-0.5"
+                    >
+                      <Star
+                        className={`h-6 w-6 ${
+                          star <= (hoverRating || reviewRating)
+                            ? "fill-yellow-400 text-yellow-400"
+                            : "text-muted-foreground/30"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+                <Textarea
+                  placeholder="แชร์ความคิดเห็นของคุณเกี่ยวกับสินค้านี้..."
+                  value={reviewComment}
+                  onChange={(e) => setReviewComment(e.target.value)}
+                  rows={3}
+                />
+                <Button onClick={handleSubmitReview} disabled={submittingReview}>
+                  {submittingReview ? "กำลังส่ง..." : "ส่งรีวิว"}
+                </Button>
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground">
+                กรุณา
+                <Link href="/login" className="text-primary underline">
+                  เข้าสู่ระบบ
+                </Link>{" "}
+                ในฐานะลูกค้าเพื่อเขียนรีวิว
+              </p>
+            )}
+          </div>
+
           {reviews.length > 0 ? (
             <div className="space-y-6 max-w-4xl">
               {reviews.map((review) => (

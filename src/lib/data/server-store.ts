@@ -101,8 +101,17 @@ export const ServerAuth = {
 // ============================================================
 // Products
 // ============================================================
+function getReviewStats(productId: string): { rating: number; reviewCount: number } {
+  const productReviews = reviews.filter((r) => r.productId === productId);
+  const reviewCount = productReviews.length;
+  if (reviewCount === 0) return { rating: 0, reviewCount: 0 };
+  const avg = productReviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount;
+  return { rating: Math.round(avg * 10) / 10, reviewCount };
+}
+
 const formatProduct = (p: Product): Product => ({
   ...p,
+  ...getReviewStats(p.id),
   status: p.stock === 0 ? "out_of_stock" : p.stock < 5 ? "low_stock" : "active"
 });
 
@@ -120,7 +129,7 @@ export const ServerProducts = {
         case "price_asc": result.sort((a, b) => a.price - b.price); break;
         case "price_desc": result.sort((a, b) => b.price - a.price); break;
         case "name": result.sort((a, b) => a.name.localeCompare(b.name)); break;
-        case "rating": result.sort((a, b) => b.rating - a.rating); break;
+        case "rating": result.sort((a, b) => getReviewStats(b.id).rating - getReviewStats(a.id).rating); break;
         case "newest": result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); break;
       }
     }
@@ -287,14 +296,8 @@ export const ServerReviews = {
   create(data: Omit<Review, "id" | "createdAt">) {
     const review: Review = { ...data, id: generateId("rev"), createdAt: new Date().toISOString() };
     reviews.push(review);
-    // Update product rating
-    const productReviews = reviews.filter((r) => r.productId === data.productId);
-    const avgRating = productReviews.reduce((sum, r) => sum + r.rating, 0) / productReviews.length;
-    const product = products.find((p) => p.id === data.productId);
-    if (product) {
-      product.rating = Math.round(avgRating * 10) / 10;
-      product.reviewCount = productReviews.length;
-    }
+    // Product rating/reviewCount are derived on read (see getReviewStats in formatProduct),
+    // so no manual aggregate update is needed here.
     return review;
   },
 };

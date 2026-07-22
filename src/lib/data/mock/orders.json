@@ -8,7 +8,7 @@
         "name": "NVIDIA GeForce RTX 5090",
         "price": 89900,
         "quantity": 1,
-        "image": "/products/rtx5090.jpg"
+        "image": "/producs/rtx5090.jpg"
       },
       {
         "productId": "prod_009",
@@ -45,7 +45,7 @@
         "name": "AMD Ryzen 9 9950X",
         "price": 25900,
         "quantity": 1,
-        "image": "/products/ryzen9-9950x.jpg"
+        "image": "/images/CPU/AMDRyzen9_9950X.jpg"
       },
       {
         "productId": "prod_015",

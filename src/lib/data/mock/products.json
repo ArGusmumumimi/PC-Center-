@@ -9,8 +9,8 @@
     "category": "cpu",
     "brand": "AMD",
     "images": [
-      "/products/ryzen9-9950x.jpg"
-    ],
+  "/images/CPU/AMDRyzen9_9950X.jpg"
+  ],
     "specs": {
       "cores": "16 Cores / 32 Threads",
       "base_clock": "4.3 GHz",
@@ -36,7 +36,7 @@
     "category": "cpu",
     "brand": "Intel",
     "images": [
-      "/products/intel-ultra9.jpg"
+      "/images/CPU/IntelCoreUltra9_285K.jpg"
     ],
     "specs": {
       "cores": "24 Cores (8P+16E)",
@@ -62,7 +62,7 @@
     "category": "cpu",
     "brand": "AMD",
     "images": [
-      "/products/ryzen7-9700x.jpg"
+      "/images/CPU/AMD_Ryzen_7_9700X.jpg"
     ],
     "specs": {
       "cores": "8 Cores / 16 Threads",
@@ -88,7 +88,7 @@
     "category": "cpu",
     "brand": "Intel",
     "images": [
-      "/products/intel-i5-14600k.jpg"
+       "/images/CPU/IntelCorei5_14600K.jpg"
     ],
     "specs": {
       "cores": "14 Cores (6P+8E)",
@@ -114,7 +114,7 @@
     "category": "gpu",
     "brand": "NVIDIA",
     "images": [
-      "/products/rtx5090.jpg"
+      "/images/GPU/NVIDIAGeForceRTX5090.jpg"
     ],
     "specs": {
       "memory": "32GB GDDR7",
@@ -140,7 +140,7 @@
     "category": "gpu",
     "brand": "NVIDIA",
     "images": [
-      "/products/rtx5070ti.jpg"
+      "/images/GPU/NVIDIAGeForceRTX5070Ti.jpg"
     ],
     "specs": {
       "memory": "16GB GDDR7",
@@ -166,7 +166,7 @@
     "category": "gpu",
     "brand": "AMD",
     "images": [
-      "/products/rx9070xt.jpg"
+      "/images/GPU/AMDRadeonRX9070XT.jpg"
     ],
     "specs": {
       "memory": "16GB GDDR6",
@@ -192,7 +192,7 @@
     "category": "gpu",
     "brand": "NVIDIA",
     "images": [
-      "/products/rtx5060.jpg"
+      "/images/GPU/NVIDIAGeForceRTX5060.jpg"
     ],
     "specs": {
       "memory": "8GB GDDR7",
@@ -218,7 +218,7 @@
     "category": "ram",
     "brand": "G.Skill",
     "images": [
-      "/products/gskill-trident-z5.jpg"
+      "/images/RAM/G.Skill.jpg"
     ],
     "specs": {
       "capacity": "32GB (2x16GB)",
@@ -244,7 +244,7 @@
     "category": "ram",
     "brand": "Kingston",
     "images": [
-      "/products/kingston-fury.jpg"
+      "/images/RAM/Kingston.jpg"
     ],
     "specs": {
       "capacity": "32GB (2x16GB)",
@@ -270,7 +270,7 @@
     "category": "ram",
     "brand": "Corsair",
     "images": [
-      "/products/corsair-vengeance.jpg"
+      "/images/RAM/Corsair.jpg"
     ],
     "specs": {
       "capacity": "64GB (2x32GB)",
@@ -296,7 +296,7 @@
     "category": "storage",
     "brand": "Samsung",
     "images": [
-      "/products/samsung-990pro.jpg"
+      "/images/SSDHDD/Samsung990Pro2TBNVMeSSD.jpg"
     ],
     "specs": {
       "capacity": "2TB",
@@ -322,7 +322,7 @@
     "category": "storage",
     "brand": "Western Digital",
     "images": [
-      "/products/wd-sn850x.jpg"
+      "/images/SSDHDD/WDBlackSN850X1TBNVMeSSD.jpg"
     ],
     "specs": {
       "capacity": "1TB",
@@ -348,7 +348,7 @@
     "category": "storage",
     "brand": "Crucial",
     "images": [
-      "/products/crucial-t700.jpg"
+      "/images/SSDHDD/CrucialT7002TBGen5NVMeSSD.jpg"
     ],
     "specs": {
       "capacity": "2TB",
@@ -374,7 +374,7 @@
     "category": "motherboard",
     "brand": "ASUS",
     "images": [
-      "/products/asus-x870e.jpg"
+      "/images/Mainboard/ASUS.jpg"
     ],
     "specs": {
       "chipset": "AMD X870E",
@@ -401,7 +401,7 @@
     "category": "motherboard",
     "brand": "MSI",
     "images": [
-      "/products/msi-z890.jpg"
+      "/images/Mainboard/MSI.jpg"
     ],
     "specs": {
       "chipset": "Intel Z890",
@@ -428,7 +428,7 @@
     "category": "psu",
     "brand": "Corsair",
     "images": [
-      "/products/corsair-rm1000x.jpg"
+      "/images/powersup/CORSAIR.jpg"
     ],
     "specs": {
       "wattage": "1000W",
@@ -454,7 +454,7 @@
     "category": "psu",
     "brand": "Seasonic",
     "images": [
-      "/products/seasonic-tx1600.jpg"
+      "/images/powersup/Seasonic.jpg"
     ],
     "specs": {
       "wattage": "1600W",
@@ -480,7 +480,7 @@
     "category": "case",
     "brand": "Lian Li",
     "images": [
-      "/products/lianli-o11.jpg"
+      "/images/case/evo.jpg"
     ],
     "specs": {
       "form_factor": "Mid Tower",
@@ -506,7 +506,7 @@
     "category": "case",
     "brand": "NZXT",
     "images": [
-      "/products/nzxt-h9.jpg"
+      "/images/case/flow.jpg"
     ],
     "specs": {
       "form_factor": "Full Tower",
@@ -532,7 +532,7 @@
     "category": "monitor",
     "brand": "Samsung",
     "images": [
-      "/products/samsung-g8-oled.jpg"
+      "/images/Monitor/SamsungOdysseyOLEDG832.jpg"
     ],
     "specs": {
       "size": "32\"",
@@ -558,7 +558,7 @@
     "category": "monitor",
     "brand": "LG",
     "images": [
-      "/products/lg-27gr95qe.jpg"
+      "/images/Monitor/LGUltraGear27GR95QE27.jpg"
     ],
     "specs": {
       "size": "27\"",
@@ -584,7 +584,7 @@
     "category": "peripherals",
     "brand": "Logitech",
     "images": [
-      "/products/logitech-gpro-tkl.jpg"
+      "/images/keymouse/logi.jpg"
     ],
     "specs": {
       "type": "Mechanical (Hall Effect)",
@@ -610,7 +610,7 @@
     "category": "peripherals",
     "brand": "Razer",
     "images": [
-      "/products/razer-deathadder-v3.jpg"
+      "/images/keymouse/razer.jpg"
     ],
     "specs": {
       "sensor": "Focus Pro 36K",
@@ -636,7 +636,7 @@
     "category": "audio",
     "brand": "SteelSeries",
     "images": [
-      "/products/steelseries-arctis-nova-pro.jpg"
+      "/images/keymouse/nova.jpg"
     ],
     "specs": {
       "driver": "40mm Neodymium",
@@ -662,7 +662,7 @@
     "category": "audio",
     "brand": "HyperX",
     "images": [
-      "/products/hyperx-cloud3.jpg"
+      "/images/keymouse/cloud.jpg"
     ],
     "specs": {
       "driver": "53mm",

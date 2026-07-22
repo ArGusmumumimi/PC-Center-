@@ -21,6 +21,7 @@ import {
   Search, ShoppingCart, User, LogOut, LayoutDashboard,
   Package, Menu, X, Minus, Plus, Trash2,
 } from "lucide-react";
+import NotificationBell from "@/components/layout/notification-bell";
 
 export default function Header() {
   const { session, isAuthenticated, logout } = useAuth();
@@ -154,6 +155,8 @@ export default function Header() {
               </SheetContent>
             </Sheet>
           )}
+
+          <NotificationBell />
 
           {/* User Menu */}
           {isAuthenticated ? (

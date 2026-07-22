@@ -2,7 +2,7 @@
 // PC Center — Server-side In-Memory Store (for API Routes)
 
 // ============================================================
-import type { User, Product, Category, Order, Cart, Review, ContactMessage } from "./schema";
+import type { User, Product, Category, Order, Cart, Review, ContactMessage, AppNotification } from "./schema";
 import { seedUsers, seedProducts, seedCategories, seedOrders, seedReviews, simpleHash } from "./seed";
 import { SignJWT, jwtVerify } from "jose";
 
@@ -15,6 +15,7 @@ const globalStore = globalThis as unknown as {
   __carts: Cart[];
   __reviews: Review[];
   __contactMessages: ContactMessage[];
+  __notifications: AppNotification[];
 };
 
 let users: User[] = globalStore.__users || [...seedUsers];
@@ -24,6 +25,7 @@ let orders: Order[] = globalStore.__orders || [...seedOrders];
 let carts: Cart[] = globalStore.__carts || [];
 let reviews: Review[] = globalStore.__reviews || [...seedReviews];
 let contactMessages: ContactMessage[] = globalStore.__contactMessages || [];
+let notifications: AppNotification[] = globalStore.__notifications || [];
 
 if (process.env.NODE_ENV !== "production") {
   globalStore.__users = users;
@@ -33,6 +35,7 @@ if (process.env.NODE_ENV !== "production") {
   globalStore.__carts = carts;
   globalStore.__reviews = reviews;
   globalStore.__contactMessages = contactMessages;
+  globalStore.__notifications = notifications;
 }
 
 
@@ -203,13 +206,13 @@ export const ServerOrders = {
   updateStatus(id: string, status: string, trackingNumber?: string) {
     const index = orders.findIndex((o) => o.id === id);
     if (index === -1) return null;
-    
+
     const oldStatus = orders[index].status;
     orders[index] = { ...orders[index], status: status as Order["status"], updatedAt: new Date().toISOString() };
-    
+
     if (trackingNumber) orders[index].trackingNumber = trackingNumber;
     if (status === "delivered") orders[index].paymentStatus = "paid";
-    
+
     // Restore stock if cancelled
     if (status === "cancelled" && oldStatus !== "cancelled") {
       for (const item of orders[index].items) {
@@ -219,10 +222,56 @@ export const ServerOrders = {
         }
       }
     }
-    
+
+    if (status !== oldStatus) {
+      const statusText = getOrderStatusMessage(status);
+      const customerName = orders[index].shippingAddress.name;
+      ServerNotifications.create({
+        userId: orders[index].userId,
+        orderId: id,
+        message: `คำสั่งซื้อ #${id} ของคุณ${statusText}`,
+      });
+      const staffMessage = `คำสั่งซื้อ #${id} (${customerName}) ${statusText}`;
+      ServerNotifications.create({ role: "staff", orderId: id, message: staffMessage });
+      ServerNotifications.create({ role: "manager", orderId: id, message: staffMessage });
+    }
+
     return orders[index];
   },
+  pay(id: string, userId: string) {
+    const index = orders.findIndex((o) => o.id === id);
+    if (index === -1) return { error: "ไม่พบคำสั่งซื้อ" };
+    if (orders[index].userId !== userId) return { error: "Forbidden" };
+    if (orders[index].status === "cancelled") return { error: "คำสั่งซื้อนี้ถูกยกเลิกแล้ว" };
+    if (orders[index].paymentStatus === "paid") return { error: "คำสั่งซื้อนี้ชำระเงินแล้ว" };
+
+    orders[index] = { ...orders[index], paymentStatus: "paid", updatedAt: new Date().toISOString() };
+
+    const customerName = orders[index].shippingAddress.name;
+    ServerNotifications.create({
+      userId,
+      orderId: id,
+      message: `ชำระเงินสำหรับคำสั่งซื้อ #${id} สำเร็จแล้ว`,
+    });
+    const staffMessage = `ได้รับการชำระเงินคำสั่งซื้อ #${id} จาก ${customerName} แล้ว`;
+    ServerNotifications.create({ role: "staff", orderId: id, message: staffMessage });
+    ServerNotifications.create({ role: "manager", orderId: id, message: staffMessage });
+
+    return { data: orders[index] };
+  },
 };
+
+function getOrderStatusMessage(status: string): string {
+  const messages: Record<string, string> = {
+    pending: "อยู่ระหว่างรอดำเนินการ",
+    confirmed: "ได้รับการยืนยันแล้ว",
+    processing: "กำลังจัดเตรียมสินค้า",
+    shipped: "กำลังจัดส่ง",
+    delivered: "จัดส่งสำเร็จแล้ว",
+    cancelled: "ถูกยกเลิก",
+  };
+  return messages[status] || `เปลี่ยนสถานะเป็น ${status}`;
+}
 
 // ============================================================
 // Cart (server-side)
@@ -313,6 +362,33 @@ export const ServerContact = {
     const message: ContactMessage = { ...data, id: generateId("msg"), createdAt: new Date().toISOString() };
     contactMessages.push(message);
     return message;
+  },
+};
+
+// ============================================================
+// Notifications
+// ============================================================
+export const ServerNotifications = {
+  create(data: Omit<AppNotification, "id" | "read" | "createdAt">) {
+    const notification: AppNotification = { ...data, id: generateId("notif"), read: false, createdAt: new Date().toISOString() };
+    notifications.push(notification);
+    return notification;
+  },
+  getForSession(userId: string, role: string) {
+    return notifications
+      .filter((n) => n.userId === userId || n.role === role)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  },
+  markRead(id: string, userId: string, role: string) {
+    const notification = notifications.find((n) => n.id === id && (n.userId === userId || n.role === role));
+    if (!notification) return null;
+    notification.read = true;
+    return notification;
+  },
+  markAllRead(userId: string, role: string) {
+    notifications.forEach((n) => {
+      if (n.userId === userId || n.role === role) n.read = true;
+    });
   },
 };
 

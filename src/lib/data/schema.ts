@@ -125,6 +125,16 @@ export interface ContactMessage {
   createdAt: string;
 }
 
+export interface AppNotification {
+  id: string;
+  userId?: string; // targets one specific user (e.g. the customer who owns the order)
+  role?: UserRole; // targets everyone with this role (e.g. broadcast to staff/manager)
+  orderId?: string;
+  message: string;
+  read: boolean;
+  createdAt: string;
+}
+
 
 
 // API Response types

@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { User, LogOut, Home, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import NotificationBell from "@/components/layout/notification-bell";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { session, isLoading, isAuthenticated, logout } = useAuth();
@@ -59,6 +60,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Home className="mr-2 h-4 w-4" />
               กลับหน้าแรก
             </Button>
+
+            <NotificationBell />
 
             <DropdownMenu>
               <DropdownMenuTrigger render={<Button variant="ghost" size="icon" />}>

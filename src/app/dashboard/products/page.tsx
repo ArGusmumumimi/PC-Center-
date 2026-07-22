@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Pencil, Trash2, Package, DollarSign, Tags, ImagePlus, X } from "lucide-react";
+import { Plus, Pencil, Trash2, Package, DollarSign, Tags, ImagePlus, X, Search } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,6 +27,8 @@ function ProductsManagementContent() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
@@ -64,7 +66,8 @@ function ProductsManagementContent() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/products?page=${page}&pageSize=10`, { cache: 'no-store' });
+      const searchParam = debouncedSearch ? `&search=${encodeURIComponent(debouncedSearch)}` : "";
+      const res = await fetch(`/api/products?page=${page}&pageSize=10${searchParam}`, { cache: 'no-store' });
       const data = await res.json();
       if (data.success) {
         setProducts(data.data.items);
@@ -85,8 +88,16 @@ function ProductsManagementContent() {
   };
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+      setPage(1);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  useEffect(() => {
     loadData();
-  }, [page]);
+  }, [page, debouncedSearch]);
 
   const handleOpenModal = (product: Product | null = null) => {
     if (product) {
@@ -218,9 +229,21 @@ function ProductsManagementContent() {
           <h2 className="text-2xl font-bold tracking-tight">จัดการสินค้า</h2>
           <p className="text-muted-foreground">รวมทั้งหมด {totalItems} รายการ</p>
         </div>
-        <Button onClick={() => handleOpenModal()}>
-          <Plus className="mr-2 h-4 w-4" /> เพิ่มสินค้าใหม่
-        </Button>
+        <div className="flex gap-2">
+          <div className="relative">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="ค้นหาสินค้า..."
+              className="w-[250px] pl-8"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <Button onClick={() => handleOpenModal()}>
+            <Plus className="mr-2 h-4 w-4" /> เพิ่มสินค้าใหม่
+          </Button>
+        </div>
       </div>
 
       <Card>

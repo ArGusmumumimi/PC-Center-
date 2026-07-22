@@ -70,9 +70,15 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="flex justify-between items-start gap-2">
             <p className="text-xs text-muted-foreground uppercase font-medium">{product.brand}</p>
             <div className="flex items-center gap-1 text-xs">
-              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-              <span>{product.rating}</span>
-              <span className="text-muted-foreground">({product.reviewCount})</span>
+              {product.reviewCount > 0 ? (
+                <>
+                  <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                  <span>{product.rating}</span>
+                  <span className="text-muted-foreground">({product.reviewCount})</span>
+                </>
+              ) : (
+                <span className="text-muted-foreground">(0)</span>
+              )}
             </div>
           </div>
           <h3 className="font-semibold text-sm line-clamp-2 leading-tight group-hover:text-primary transition-colors">

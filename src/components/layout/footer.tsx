@@ -1,5 +1,85 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+
+function ContactDialog() {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("ส่งข้อความถึงเราเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด");
+        setName("");
+        setEmail("");
+        setMessage("");
+        setOpen(false);
+      } else {
+        toast.error(data.error || "ส่งข้อความไม่สำเร็จ");
+      }
+    } catch {
+      toast.error("เกิดข้อผิดพลาด กรุณาลองใหม่");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger className="text-left hover:text-foreground transition-colors underline-offset-2 hover:underline">
+        📧 support@pccenter.com
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>ติดต่อเรา</DialogTitle>
+          <DialogDescription>
+            กรอกแบบฟอร์มด้านล่าง ทีมงานจะติดต่อกลับทางอีเมลของคุณ
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="contact-name">ชื่อ</Label>
+            <Input id="contact-name" value={name} onChange={(e) => setName(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="contact-email">อีเมล</Label>
+            <Input id="contact-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="contact-message">ข้อความ</Label>
+            <Textarea id="contact-message" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} required />
+          </div>
+          <DialogFooter>
+            <Button type="submit" disabled={submitting}>
+              {submitting ? "กำลังส่ง..." : "ส่งข้อความ"}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 export default function Footer() {
   return (
@@ -48,7 +128,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2 text-sm text-muted-foreground">
               <p>📍 99 ถ.รัชดาภิเษก กรุงเทพฯ 10400</p>
               <p>📞 02-123-4567</p>
-              <p>📧 support@pccenter.com</p>
+              <ContactDialog />
               <p>🕐 จ-ศ 9:00-18:00 น.</p>
             </div>
           </div>

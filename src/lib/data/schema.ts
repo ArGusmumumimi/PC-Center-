@@ -117,6 +117,14 @@ export interface Review {
   createdAt: string;
 }
 
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  createdAt: string;
+}
+
 
 
 // API Response types

@@ -772,4 +772,9 @@ flowchart TB
   "createdAt": "2025-06-20T14:30:00Z"
 }
 ```
+---
+** UAT **
 
+https://file.kiwi/82ab8805#I05BamSeOTJHjR6pFzAQNA
+
+---

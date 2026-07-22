@@ -2,7 +2,7 @@
 // PC Center — Server-side In-Memory Store (for API Routes)
 
 // ============================================================
-import type { User, Product, Category, Order, Cart, Review } from "./schema";
+import type { User, Product, Category, Order, Cart, Review, ContactMessage } from "./schema";
 import { seedUsers, seedProducts, seedCategories, seedOrders, seedReviews, simpleHash } from "./seed";
 import { SignJWT, jwtVerify } from "jose";
 
@@ -14,6 +14,7 @@ const globalStore = globalThis as unknown as {
   __orders: Order[];
   __carts: Cart[];
   __reviews: Review[];
+  __contactMessages: ContactMessage[];
 };
 
 let users: User[] = globalStore.__users || [...seedUsers];
@@ -22,6 +23,7 @@ let categories: Category[] = globalStore.__categories || [...seedCategories];
 let orders: Order[] = globalStore.__orders || [...seedOrders];
 let carts: Cart[] = globalStore.__carts || [];
 let reviews: Review[] = globalStore.__reviews || [...seedReviews];
+let contactMessages: ContactMessage[] = globalStore.__contactMessages || [];
 
 if (process.env.NODE_ENV !== "production") {
   globalStore.__users = users;
@@ -30,6 +32,7 @@ if (process.env.NODE_ENV !== "production") {
   globalStore.__orders = orders;
   globalStore.__carts = carts;
   globalStore.__reviews = reviews;
+  globalStore.__contactMessages = contactMessages;
 }
 
 
@@ -302,7 +305,16 @@ export const ServerReviews = {
   },
 };
 
-
+// ============================================================
+// Contact Messages
+// ============================================================
+export const ServerContact = {
+  create(data: Omit<ContactMessage, "id" | "createdAt">) {
+    const message: ContactMessage = { ...data, id: generateId("msg"), createdAt: new Date().toISOString() };
+    contactMessages.push(message);
+    return message;
+  },
+};
 
 // ============================================================
 // Dashboard Stats

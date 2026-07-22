@@ -4,6 +4,7 @@ import { useState, Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/auth-context";
+import { getSession } from "@/lib/auth";
 import { canAccessDashboard } from "@/lib/rbac";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,9 +17,9 @@ function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/";
-  
+
   const { login, isLoading, isAuthenticated, session } = useAuth();
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -41,13 +42,12 @@ function LoginContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    
+
     const result = await login(email, password);
     if (result.success) {
       toast.success("เข้าสู่ระบบสำเร็จ");
-      const authData = localStorage.getItem("pc_center_auth_session");
-      if (authData) {
-        const sessionData = JSON.parse(authData);
+      const sessionData = getSession();
+      if (sessionData) {
         if (canAccessDashboard(sessionData.role) && redirectPath === "/") {
           router.push(sessionData.role === "manager" ? "/dashboard" : "/dashboard/orders");
         } else {
@@ -65,10 +65,10 @@ function LoginContent() {
       <div className="w-full max-w-md">
         <div className="mb-6">
           <Link href="/" className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "text-muted-foreground hover:text-foreground")}>
-              <ArrowLeft className="mr-2 h-4 w-4" /> กลับหน้าแรก
+            <ArrowLeft className="mr-2 h-4 w-4" /> กลับหน้าแรก
           </Link>
         </div>
-        
+
         <div className="bg-card border rounded-2xl p-8 shadow-sm">
           <div className="text-center mb-8">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground text-xl font-black mb-4">
@@ -83,13 +83,13 @@ function LoginContent() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">อีเมล</Label>
-              <Input 
-                id="email" 
-                type="email" 
-                placeholder="name@example.com" 
+              <Input
+                id="email"
+                type="email"
+                placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required 
+                required
               />
             </div>
             <div className="space-y-2">
@@ -99,15 +99,15 @@ function LoginContent() {
                   ลืมรหัสผ่าน?
                 </Link>
               </div>
-              <Input 
-                id="password" 
-                type="password" 
+              <Input
+                id="password"
+                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required 
+                required
               />
             </div>
-            
+
             <Button type="submit" className="w-full mt-6" disabled={submitting}>
               {submitting ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
             </Button>
@@ -119,7 +119,7 @@ function LoginContent() {
               สมัครสมาชิก
             </Link>
           </div>
-          
+
           <div className="mt-8 pt-6 border-t text-xs text-muted-foreground">
             <p className="font-semibold mb-2">บัญชีสำหรับทดสอบ:</p>
             <ul className="space-y-1">

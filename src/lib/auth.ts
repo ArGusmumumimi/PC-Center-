@@ -2,6 +2,7 @@
 // PC Center — Auth System
 // ============================================================
 import type { UserRole } from "./data/schema";
+import { encryptData, decryptData } from "./encryption";
 
 const AUTH_KEY = "pc_center_auth_session";
 
@@ -30,7 +31,7 @@ export async function login(email: string, password: string): Promise<{ session:
         token: data.data.token,
       };
       if (typeof window !== "undefined") {
-        localStorage.setItem(AUTH_KEY, JSON.stringify(session));
+        localStorage.setItem(AUTH_KEY, encryptData(session));
       }
       return { session };
     }
@@ -63,7 +64,7 @@ export async function register(
         token: data.data.token,
       };
       if (typeof window !== "undefined") {
-        localStorage.setItem(AUTH_KEY, JSON.stringify(session));
+        localStorage.setItem(AUTH_KEY, encryptData(session));
       }
       return { session };
     }
@@ -83,7 +84,7 @@ export function getSession(): AuthSession | null {
   if (typeof window === "undefined") return null;
   try {
     const data = localStorage.getItem(AUTH_KEY);
-    return data ? JSON.parse(data) : null;
+    return data ? (decryptData(data) as AuthSession) : null;
   } catch {
     return null;
   }

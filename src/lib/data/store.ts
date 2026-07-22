@@ -8,6 +8,7 @@ import {
   seedUsers, seedProducts, seedCategories, seedOrders,
   seedReviews,
 } from "./seed";
+import { encryptData, decryptData } from "../encryption";
 
 const STORAGE_KEYS = {
   users: "pc_center_users",
@@ -31,7 +32,7 @@ function getCollection<T>(key: string): T[] {
   if (!isBrowser()) return [];
   try {
     const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : [];
+    return data ? (decryptData(data) as T[]) || [] : [];
   } catch {
     return [];
   }
@@ -39,7 +40,7 @@ function getCollection<T>(key: string): T[] {
 
 function setCollection<T>(key: string, data: T[]): void {
   if (!isBrowser()) return;
-  localStorage.setItem(key, JSON.stringify(data));
+  localStorage.setItem(key, encryptData(data));
 }
 
 // Initialize seed data if not already done

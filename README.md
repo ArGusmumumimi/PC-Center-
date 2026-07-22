@@ -275,238 +275,173 @@ classDiagram
     direction TB
 
     class User {
-        <<abstract>>
-        -int userId
-        -string username
+        -string id
         -string email
-        -string passwordHash
+        -string password
+        -string name
         -string phone
+        -string address
+        -UserRole role
         -string status
-        -datetime createdAt
-        -datetime updatedAt
-        +login(email, password) boolean
+        -string avatar
+        -string createdAt
+        -string updatedAt
+        +login(email, password) AuthResult
+        +register(name, email, password, phone, address) AuthResult
         +logout() void
-        +updateProfile() void
-        +changePassword() void
+        +getSession() AuthSession
+        +getUserByToken(token) User
     }
 
     class Customer {
-        -int customerId
-        -string firstName
-        -string lastName
-        -date dateOfBirth
-        -string gender
-        -datetime registeredAt
-        +viewProfile() void
+        +searchProducts(query, category, brand, sort) PaginatedResponse
+        +viewProductDetail(slug) Product
+        +addToCart(productId, qty) void
+        +removeFromCart(productId) void
+        +updateCartQty(productId, qty) void
+        +clearCart() void
+        +checkout(orderData) Order
         +viewOrders() List~Order~
-        +addAddress() void
+        +viewOrderDetail(id) Order
+        +writeReview(productId, rating, comment) Review
+        +sendContactMessage(name, email, message) ContactMessage
     }
 
     class Staff {
-        -int staffId
-        -string firstName
-        -string lastName
-        -string position
-        +viewOrders() List~Order~
-        +updateOrderStatus() void
+        +viewAllOrders() List~Order~
+        +updateOrderStatus(id, status, trackingNo) Order
+        +viewCustomers() List~User~
     }
 
     class Manager {
-        -int managerId
-        -string firstName
-        -string lastName
-        -string department
-        +manageProduct() void
-        +manageCategory() void
-        +manageStock() void
-        +viewCustomerInfo() void
-        +manageUser() void
-    }
-
-    class Brand {
-        -int brandId
-        -string country
-        -string logoUrl
-        -string description
-        -string status
-        +getProducts() List~Product~
-    }
-
-    class Model {
-        -int modelId
-        -int brandId
-        -string name
-        -string series
-        -string description
-        -string status
-        +getProducts() List~Product~
+        +createProduct(data) Product
+        +updateProduct(id, data) Product
+        +deleteProduct(id) boolean
+        +createCategory(data) Category
+        +viewAllUsers() List~User~
+        +createUser(data) User
+        +updateUserRole(id, role) User
+        +updateUserStatus(id, status) User
+        +viewDashboardStats() DashboardStats
     }
 
     class Category {
-        -int categoryId
+        -string id
         -string name
+        -string slug
         -string description
-        -string status
-        +getSubCategories() List~Category~
-    }
-
-    class ProductSearch {
-        <<Criteria>>
-        -string keyword
-        -int brandId
-        -int modelId
-        -int categoryId
-        -decimal minPrice
-        -decimal maxPrice
-        -string sortBy
-        -boolean inStockOnly
-        +search() List~Product~
-        +clear() void
+        -string icon
+        -number productCount
     }
 
     class Product {
-        -int productId
-        -int modelId
-        -string sku
+        -string id
         -string name
-        -text description
-        -decimal price
-        -string status
-        -datetime createdAt
-        +getImages() List~ProductImage~
+        -string slug
+        -string description
+        -number price
+        -number comparePrice
+        -string category
+        -string brand
+        -string[] images
+        -ProductSpecs specs
+        -number stock
+        -number rating
+        -number reviewCount
+        -boolean featured
+        -ProductStatus status
+        -string createdAt
     }
 
-    class ProductItem {
-        -int itemId
-        -int productId
-        -string serialNumber
-        -string warranty
-        -string status
-    }
-
-    class ProductImage {
-        -int imageId
-        -int productId
-        -string imageUrl
-        -boolean isPrimary
-        -int sortOrder
-    }
-
-    class Inventory {
-        -int inventoryId
-        -int productId
-        -int quantityOnHand
-        -datetime lastUpdated
-        +addStock() void
-        +reduceStock() void
+    class ProductSpecs {
+        <<interface>>
+        -string key : value
     }
 
     class Cart {
-        -int cartId
-        -int customerId
-        -string status
-        -datetime updatedAt
+        -string userId
+        -CartItem[] items
+        -string updatedAt
         +addItem(productId, qty) void
-        +updateItemQty(productId, qty) void
         +removeItem(productId) void
+        +updateQuantity(productId, qty) void
         +clear() void
-        +getTotal() decimal
+        +getTotal() number
     }
 
-    class Review {
-        -int reviewId
-        -int productId
-        -int customerId
-        -int rating
-        -text comment
-        -datetime createdAt
-        +updateComment() void
-    }
-
-    class OrderItem {
-        -int orderItemId
-        -int orderId
-        -int productId
-        -int quantity
-        -decimal unitPrice
-        +getSubTotal() decimal
+    class CartItem {
+        -string productId
+        -number quantity
     }
 
     class Order {
-        -int orderId
-        -string orderNo
-        -int customerId
-        -datetime orderDate
-        -string status
-        -decimal totalAmount
-        -decimal shippingAmount
-        -datetime createdAt
-        +calculateTotal() decimal
+        -string id
+        -string userId
+        -OrderItem[] items
+        -number subtotal
+        -number shipping
+        -number discount
+        -number total
+        -OrderStatus status
+        -ShippingAddress shippingAddress
+        -PaymentMethod paymentMethod
+        -PaymentStatus paymentStatus
+        -string trackingNumber
+        -string promoCode
+        -string notes
+        -string createdAt
+        -string updatedAt
     }
 
-    class Payment {
-        -int paymentId
-        -int orderId
-        -string method
-        -decimal amount
-        -string carrier
-        -datetime paymentDate
-        -string transactionId
-        +confirmPayment() void
+    class OrderItem {
+        -string productId
+        -string name
+        -number price
+        -number quantity
+        -string image
     }
 
-    class Shipping {
-        -int shippingId
-        -int orderId
-        -string trackingNo
-        -string shippingAddress
-        -string shippingMethod
-        -decimal shippingFee
-        -string status
-        -datetime shippedAt
-        +updateStatus() void
-    }
-
-    class Address {
-        -int addressId
-        -int userId
-        -string type
-        -string fullName
+    class ShippingAddress {
+        -string name
         -string phone
-        -string addressLine
-        -string district
-        -string city
-        -string postalCode
-        -boolean isDefault
+        -string address
+    }
+
+    class Review {
+        -string id
+        -string userId
+        -string productId
+        -number rating
+        -string comment
+        -string userName
+        -string createdAt
+    }
+
+    class ContactMessage {
+        -string id
+        -string name
+        -string email
+        -string message
+        -string createdAt
     }
 
     User <|-- Customer
     User <|-- Staff
     User <|-- Manager
 
-    Brand "1" --> "1..*" Model
-    Brand "1" --> "1..*" Product
-    Model "1" --> "1..*" Product
-    Category "1" --> "1..*" Product
+    Category "1" --> "0..*" Product : contains
+    Product "1" --> "1" ProductSpecs : has
+    Product "1" --> "0..*" Review : receives
 
-    Product "1" --> "1..*" ProductItem
-    Product "1" --> "1" Inventory
-    Product "1" --> "1..*" ProductImage
-    Product "1" --> "0..*" Review
+    Customer "1" --> "0..1" Cart : owns
+    Customer "1" --> "0..*" Order : places
+    Customer "1" --> "0..*" Review : writes
+    Customer "1" --> "0..*" ContactMessage : sends
 
-    ProductSearch ..> Product : uses
-
-    Customer "1" --> "0..1" Cart
-    Customer "1" --> "0..*" Order
-    Customer "1" --> "0..*" Review
-    Customer "1" --> "0..*" Address
-
-    Cart "1" o-- "0..*" OrderItem
+    Cart "1" *-- "0..*" CartItem
 
     Order "1" *-- "1..*" OrderItem
-    Order "1" --> "1" Payment
-    Order "1" --> "1" Shipping
-    Order "1" --> "0..1" Address
+    Order "1" --> "1" ShippingAddress : ships to
 ```
 
 ---
@@ -695,64 +630,146 @@ flowchart TB
 **👤 User**
 ```json
 {
-  "user_id": 1,
-  "name": "John Doe",
-  "email": "john@gmail.com",
-  "role": "customer"
+  "id": "usr_001",
+  "email": "admin@pccenter.com",
+  "password": "hash_39c43b7d",
+  "name": "Admin Manager",
+  "phone": "0891234567",
+  "address": "99 ถ.รัชดาภิเษก แขวงดินแดง เขตดินแดง กรุงเทพฯ 10400",
+  "role": "manager",
+  "status": "active",
+  "avatar": "/avatars/manager.png",
+  "createdAt": "2025-01-01T00:00:00Z",
+  "updatedAt": "2025-01-01T00:00:00Z"
 }
 ```
+> **UserRole:** `"customer"` | `"staff"` | `"manager"` · **Status:** `"active"` | `"inactive"`
+
+---
+
+**📂 Category**
+```json
+{
+  "id": "cat_001",
+  "name": "โปรเซสเซอร์ (CPU)",
+  "slug": "cpu",
+  "description": "หน่วยประมวลผลกลาง",
+  "icon": "Cpu",
+  "productCount": 4
+}
+```
+
+---
 
 **📦 Product**
 ```json
 {
-  "product_id": 1,
-  "name": "Gaming Mouse",
-  "price": 599,
-  "stock": 20,
-  "category": "Mouse"
+  "id": "prod_001",
+  "name": "AMD Ryzen 9 9950X",
+  "slug": "amd-ryzen-9-9950x",
+  "description": "โปรเซสเซอร์ AMD Ryzen 9 9950X 16 Cores 32 Threads ...",
+  "price": 25900,
+  "comparePrice": 28900,
+  "category": "cpu",
+  "brand": "AMD",
+  "images": ["/images/CPU/AMDRyzen9_9950X.jpg"],
+  "specs": {
+    "cores": "16 Cores / 32 Threads",
+    "base_clock": "4.3 GHz",
+    "boost_clock": "5.7 GHz",
+    "cache": "80MB",
+    "tdp": "170W",
+    "socket": "AM5"
+  },
+  "stock": 12,
+  "rating": 4.9,
+  "reviewCount": 89,
+  "featured": true,
+  "status": "active",
+  "createdAt": "2025-01-10T00:00:00Z"
 }
 ```
+> **ProductStatus:** `"active"` | `"low_stock"` | `"out_of_stock"`
 
-**🏷️ Product Item (Warranty)**
-```json
-{
-  "item_id": 101,
-  "product_id": 1,
-  "serial_number": "SN-123456789",
-  "warranty": "1 Year",
-  "status": "Available"
-}
-```
+---
 
 **🛒 Cart**
 ```json
 {
-  "cart_id": 1,
-  "user_id": 1,
+  "userId": "usr_003",
   "items": [
     {
-      "product_id": 1,
-      "quantity": 2,
-      "price": 599
+      "productId": "prod_001",
+      "quantity": 2
     }
-  ]
+  ],
+  "updatedAt": "2025-06-15T10:30:00Z"
 }
 ```
 
-**📑 Order**
+---
+
+**📝 Order**
 ```json
 {
-  "order_id": 1,
-  "user_id": 1,
+  "id": "ord_001",
+  "userId": "usr_003",
   "items": [
     {
-      "product_id": 1,
-      "quantity": 2,
-      "unit_price": 599
+      "productId": "prod_005",
+      "name": "NVIDIA GeForce RTX 5090",
+      "price": 89900,
+      "quantity": 1,
+      "image": "/images/GPU/RTX5090.jpg"
     }
   ],
-  "total_price": 1198,
-  "status": "pending",
-  "created_at": "2024-10-25T10:00:00Z"
+  "subtotal": 89900,
+  "shipping": 0,
+  "discount": 0,
+  "total": 89900,
+  "status": "delivered",
+  "shippingAddress": {
+    "name": "สมหญิง ลูกค้า",
+    "phone": "0893456789",
+    "address": "123 ถ.สุขุมวิท กรุงเทพฯ"
+  },
+  "paymentMethod": "credit_card",
+  "paymentStatus": "paid",
+  "trackingNumber": "TH20250301001",
+  "promoCode": "",
+  "notes": "",
+  "createdAt": "2025-03-01T10:30:00Z",
+  "updatedAt": "2025-03-05T15:00:00Z"
 }
 ```
+> **OrderStatus:** `"pending"` | `"confirmed"` | `"processing"` | `"shipped"` | `"delivered"` | `"cancelled"`
+> **PaymentMethod:** `"credit_card"` | `"bank_transfer"` | `"cod"` · **PaymentStatus:** `"pending"` | `"paid"` | `"refunded"`
+
+---
+
+**⭐ Review**
+```json
+{
+  "id": "rev_001",
+  "userId": "usr_003",
+  "productId": "prod_005",
+  "rating": 5,
+  "comment": "การ์ดจอแรงมากครับ เล่นเกมได้ทุกเกม 4K Ultra ลื่นหมด",
+  "userName": "สมหญิง ลูกค้า",
+  "createdAt": "2025-03-10T12:00:00Z"
+}
+```
+
+---
+
+**✉️ ContactMessage**
+```json
+{
+  "id": "msg_abc123",
+  "name": "สมชาย ลูกค้า",
+  "email": "somchai@example.com",
+  "message": "สนใจสอบถามเรื่องการรับประกันสินค้าครับ",
+  "createdAt": "2025-06-20T14:30:00Z"
+}
+```
+

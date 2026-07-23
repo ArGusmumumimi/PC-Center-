@@ -1,4 +1,4 @@
-﻿# 🖥️ PC Center – ศูนย์รวมคอมพิวเตอร์และอุปกรณ์ไอที
+# 🖥️ PC Center – ศูนย์รวมคอมพิวเตอร์และอุปกรณ์ไอที
 
 ## 📌 CSI204 Project Hub
 ระบบเว็บไซต์ขายคอมพิวเตอร์และอุปกรณ์ไอทีออนไลน์ (E-Commerce Platform)
@@ -57,8 +57,7 @@
   - ระบบดูรายการคำสั่งซื้อทั้งหมด
   - ระบบอัปเดตสถานะคำสั่งซื้อ
 * **Manager (ผู้จัดการ):**
-  - ระบบจัดการหมวดหมู่สินค้า
-  - ระบบจัดการสต็อกสินค้า
+  - ระบบจัดการสินค้าและสต็อกสินค้า
   - ระบบดูข้อมูลลูกค้า (เช่น ที่อยู่ การติดต่อ)
   - ระบบจัดการผู้ใช้ระบบ (ระงับสิทธิ์การใช้งาน)
 
@@ -120,7 +119,6 @@ Occupation: Store Manager / Business Owner
 
 Goals:
 - จัดการข้อมูลสินค้า (เพิ่ม / แก้ไข / ลบ) และบริหารสต็อกสินค้า
-- จัดการหมวดหมู่สินค้า
 - บริหารจัดการผู้ใช้ระบบ (เพิ่มผู้ใช้ / เปิด-ปิดสถานะบัญชี)
 - ตรวจสอบภาพรวมยอดขายและรายงานสรุปของระบบ
 
@@ -174,22 +172,18 @@ flowchart LR
     Customer(("👤 ลูกค้า\n(Customer)"))
 
     subgraph OnlineStore_Customer["ฟังก์ชันสำหรับลูกค้า"]
-        UC1([สมัครสมาชิก])
-        UC2([เข้าสู่ระบบ])
-        UC3([ค้นหาสินค้า])
-        UC4([ดูรายละเอียดสินค้า])
-        UC5(["จัดการตะกร้าสินค้า\n(เพิ่ม / แก้ไข / ลบ / ดูรายการ)"])
-        UC6([สั่งซื้อสินค้า])
-        UC7([ชำระเงิน])
-        UC8([ติดตามสถานะคำสั่งซื้อ])
-        UC9([ประวัติการสั่งซื้อ])
-        UC10(["ติดต่อสอบถาม / รีวิวสินค้า"])
+        UC1([สมัครสมาชิกและเข้าสู่ระบบ])
+        UC2([ค้นหาและกรองสินค้า])
+        UC3([ดูรายละเอียดสินค้า])
+        UC4(["จัดการตะกร้าสินค้า\n(เพิ่ม / แก้ไข / ลบ)"])
+        UC5([สั่งซื้อสินค้าและชำระเงิน])
+        UC6([ประวัติการสั่งซื้อและติดตามสถานะ])
+        UC7([รีวิวสินค้า])
     end
 
     subgraph extend_include[" "]
-        UC3E(["ตัวกรองการค้นหา\n(แบรนด์ / รุ่น / ราคา\nประเภท / คุณสมบัติอื่น ๆ)"])
-        UC7I([เลือกช่องทางชำระเงิน])
-        UC7I2([ชำระเงิน])
+        UC2E(["ตัวกรองการค้นหา\n(หมวดหมู่ / เรียงลำดับราคา)"])
+        UC5I([เลือกช่องทางชำระเงิน])
     end
 
     subgraph ExtServices_1[" "]
@@ -203,14 +197,10 @@ flowchart LR
     Customer --- UC5
     Customer --- UC6
     Customer --- UC7
-    Customer --- UC8
-    Customer --- UC9
-    Customer --- UC10
 
-    UC3 -. "≪extend≫" .-> UC3E
-    UC7 -. "≪include≫" .-> UC7I
-    UC7I -. "≪include≫" .-> UC7I2
-    UC7 --- EXT1
+    UC2 -. "≪extend≫" .-> UC2E
+    UC5 -. "≪include≫" .-> UC5I
+    UC5 --- EXT1
 ```
 
 ### 4.2 ฟังก์ชันสำหรับพนักงาน (Staff)
@@ -244,7 +234,6 @@ flowchart LR
 
     subgraph OnlineStore_Manager["ฟังก์ชันสำหรับผู้จัดการ"]
         UM1(["จัดการสินค้าและสต็อกสินค้า\n(เพิ่ม / แก้ไข / ลบ / สต็อก)"])
-        UM2(["จัดการหมวดหมู่สินค้า\n(เพิ่ม / แก้ไข / ลบ)"])
         UM4(["ดูข้อมูลลูกค้า\n(เช่น ที่อยู่ การติดต่อ)"])
         UM5(["จัดการผู้ใช้ระบบ\n(ระงับสิทธิ์การใช้งาน)"])
     end
@@ -256,7 +245,6 @@ flowchart LR
     end
 
     Manager --- UM1
-    Manager --- UM2
     Manager --- UM4
     Manager --- UM5
 
@@ -304,7 +292,6 @@ classDiagram
         +viewOrders() List~Order~
         +viewOrderDetail(id) Order
         +writeReview(productId, rating, comment) Review
-        +sendContactMessage(name, email, message) ContactMessage
     }
 
     class Staff {
@@ -344,7 +331,6 @@ classDiagram
         -string category
         -string brand
         -string[] images
-        -ProductSpecs specs
         -number stock
         -number rating
         -number reviewCount
@@ -417,26 +403,16 @@ classDiagram
         -string createdAt
     }
 
-    class ContactMessage {
-        -string id
-        -string name
-        -string email
-        -string message
-        -string createdAt
-    }
-
     User <|-- Customer
     User <|-- Staff
     User <|-- Manager
 
     Category "1" --> "0..*" Product : contains
-    Product "1" --> "1" ProductSpecs : has
     Product "1" --> "0..*" Review : receives
 
     Customer "1" --> "0..1" Cart : owns
     Customer "1" --> "0..*" Order : places
     Customer "1" --> "0..*" Review : writes
-    Customer "1" --> "0..*" ContactMessage : sends
 
     Staff "1" --> "0..*" Order : manages
     Manager "1" --> "0..*" Product : manages
@@ -452,7 +428,7 @@ classDiagram
 
 ## 6. แผนภาพลำดับการทำงาน (Sequence Diagram)
 
-### 6.1 กระบวนการของลูกค้า : ค้นหาสินค้าและสั่งซื้อ
+### 6.1 กระบวนการของลูกค้า : ลูกค้า (Customer Journey)
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'actorBkg': '#dce6f5', 'actorTextColor': '#333', 'actorBorder': '#7b9fd4', 'signalColor': '#333', 'signalTextColor': '#333', 'labelBoxBkgColor': '#dce6f5', 'labelBoxBorderColor': '#7b9fd4', 'labelTextColor': '#333', 'loopTextColor': '#333', 'noteBkgColor': '#fff3cd', 'noteTextColor': '#333', 'noteBorderColor': '#ffc107', 'activationBkgColor': '#e8f0fe', 'activationBorderColor': '#7b9fd4', 'sequenceNumberColor': '#fff', 'background': '#ffffff'}}}%%
@@ -460,47 +436,72 @@ sequenceDiagram
     autonumber
     actor C as ลูกค้า (Customer)
     participant WEB as Web UI (Frontend)
+    participant AUTH as Auth Service
     participant SEARCH as Search Service
     participant PROD as Product Service
-    participant INV as Inventory Service
     participant CART as Cart Service
     participant ORD as Order Service
     participant PAY as Payment Gateway
-    participant NOTI as Notification Service
+    participant REV as Review Service
     participant DB as Database
 
-    C->>WEB: 1. เข้าสู่เว็บไซต์
-    WEB-->>C: 1.1 แสดงหน้าแรก
+    %% 1. สมัครสมาชิกและเข้าสู่ระบบ
+    C->>WEB: 1. สมัครสมาชิก / เข้าสู่ระบบ
+    WEB->>AUTH: 1.1 ตรวจสอบข้อมูล
+    AUTH->>DB: 1.1.1 บันทึก/ดึงข้อมูลผู้ใช้
+    DB-->>AUTH: 1.1.2 ยืนยันข้อมูล
+    AUTH-->>WEB: 1.1.3 ส่ง Token (Session)
+    WEB-->>C: 1.2 เข้าสู่ระบบสำเร็จ
 
-    C->>WEB: 2. ค้นหาสินค้า (กรองแบรนด์/รุ่น/ราคา)
-    WEB->>SEARCH: 2.1.1 ส่งข้อมูลการค้นหา
-    SEARCH->>PROD: 2.1.1.1 สืบค้นสินค้า
-    PROD->>INV: 2.1.1.1.1 ดึงข้อมูลสต็อกสินค้า
-    INV-->>PROD: 2.1.1.1.2 ข้อมูลสต็อก
-    PROD-->>SEARCH: 2.1.1.2 ผลการค้นหาและสต็อก
-    SEARCH-->>WEB: 2.1.2 แสดงรายการสินค้า
+    %% 2. ค้นหาและกรองสินค้า
+    C->>WEB: 2. ค้นหาและกรองสินค้าตามหมวดหมู่
+    WEB->>SEARCH: 2.1 ส่งคำค้นหา
+    SEARCH->>DB: 2.1.1 สืบค้นข้อมูลสินค้า
+    DB-->>SEARCH: 2.1.2 ผลการค้นหา
+    SEARCH-->>WEB: 2.1.3 ส่งคืนรายการสินค้า
     WEB-->>C: 2.2 แสดงผลรายการสินค้า
 
-    C->>WEB: 3. จัดการตะกร้าสินค้า (เพิ่ม/แก้ไข)
-    WEB->>CART: 3.1 อัปเดตข้อมูลตะกร้า
-    CART->>DB: 3.1.1 บันทึกรายการตะกร้า
-    DB-->>CART: 3.1.2 ยืนยันการเปลี่ยนแปลง
-    CART-->>WEB: 3.2 แสดงตะกร้าสินค้า
+    %% 3. ดูรายละเอียดสินค้า
+    C->>WEB: 3. ดูรายละเอียดสินค้า
+    WEB->>PROD: 3.1 ขอข้อมูลรายละเอียด
+    PROD->>DB: 3.1.1 ดึงข้อมูลสินค้าและรีวิว
+    DB-->>PROD: 3.1.2 ส่งข้อมูลกลับ
+    PROD-->>WEB: 3.1.3 ข้อมูลสินค้า
+    WEB-->>C: 3.2 แสดงรายละเอียด
 
-    C->>WEB: 4. ดำเนินการสั่งซื้อ
-    WEB->>ORD: 4.1 สร้างคำสั่งซื้อ
-    ORD->>DB: 4.1.1 บันทึกคำสั่งซื้อ (สถานะ: รอชำระเงิน)
-    DB-->>ORD: 4.1.2 ยืนยันการบันทึก
-    ORD-->>WEB: 4.2 แสดงข้อมูลคำสั่งซื้อ
+    %% 4. จัดการตะกร้าสินค้า
+    C->>WEB: 4. จัดการตะกร้าสินค้า (เพิ่ม/ลด/ลบ)
+    WEB->>CART: 4.1 อัปเดตตะกร้า
+    CART->>DB: 4.1.1 บันทึกรายการ
+    DB-->>CART: 4.1.2 ยืนยันการเปลี่ยนแปลง
+    CART-->>WEB: 4.2 ตะกร้าล่าสุด
+    WEB-->>C: 4.3 แสดงตะกร้าสินค้า
 
-    C->>WEB: 5. ชำระเงิน
-    WEB->>PAY: 5.1 ส่งข้อมูลการชำระเงิน
-    PAY->>PAY: 5.1.1 ตรวจสอบและดำเนินการชำระเงิน
-    PAY-->>WEB: 5.1.2 ผลการชำระเงิน
-    WEB->>ORD: 5.3 อัปเดตสถานะคำสั่งซื้อ (ชำระเงินสำเร็จ)
-    WEB->>NOTI: 5.4 ส่งการแจ้งเตือนยืนยันคำสั่งซื้อ
-    NOTI->>C: 5.4.1 ส่งอีเมล/ข้อความ
-    WEB-->>C: 5.5 แสดงผลยืนยันการสั่งซื้อสำเร็จ
+    %% 5. สั่งซื้อสินค้าและชำระเงิน
+    C->>WEB: 5. สั่งซื้อสินค้าและชำระเงิน
+    WEB->>ORD: 5.1 สร้างคำสั่งซื้อ
+    ORD->>DB: 5.1.1 บันทึกคำสั่งซื้อ (รอชำระ)
+    WEB->>PAY: 5.2 ส่งข้อมูลการชำระเงิน
+    PAY-->>WEB: 5.2.1 ผลการชำระเงิน
+    WEB->>ORD: 5.3 อัปเดตสถานะ (ชำระสำเร็จ)
+    ORD->>DB: 5.3.1 บันทึกสถานะใหม่
+    WEB-->>C: 5.4 ยืนยันคำสั่งซื้อสำเร็จ
+
+    %% 6. ติดตามสถานะและประวัติการสั่งซื้อ
+    C->>WEB: 6. ดูประวัติและติดตามสถานะคำสั่งซื้อ
+    WEB->>ORD: 6.1 ขอข้อมูลประวัติ
+    ORD->>DB: 6.1.1 ดึงประวัติและสถานะ
+    DB-->>ORD: 6.1.2 ส่งข้อมูล
+    ORD-->>WEB: 6.1.3 ข้อมูลประวัติและสถานะ
+    WEB-->>C: 6.2 แสดงสถานะปัจจุบัน
+
+    %% 7. รีวิวสินค้า
+    C->>WEB: 7. รีวิวสินค้า
+    WEB->>REV: 7.1 ส่งข้อมูลรีวิวและคะแนน
+    REV->>DB: 7.1.1 บันทึกรีวิว
+    DB-->>REV: 7.1.2 ยืนยันการบันทึก
+    REV-->>WEB: 7.1.3 อัปเดตสำเร็จ
+    WEB-->>C: 7.2 แสดงรีวิวในหน้าสินค้า
 ```
 
 ### 6.2 กระบวนการของพนักงาน : จัดการออเดอร์
@@ -512,7 +513,6 @@ sequenceDiagram
     actor S as พนักงาน (Staff)
     participant SUI as Staff UI (Frontend)
     participant ORD as Order Service
-    participant NOTI as Notification Service
     participant DB as Database
 
     S->>SUI: 1. เข้าสู่ระบบ (พนักงาน)
@@ -528,9 +528,8 @@ sequenceDiagram
     SUI->>ORD: 3.1 ส่งข้อมูลอัปเดตสถานะ
     ORD->>DB: 3.1.1 บันทึกสถานะคำสั่งซื้อ
     DB-->>ORD: 3.1.2 สถานะเปลี่ยนแปลงสำเร็จ
-    ORD->>NOTI: 3.2 ส่งการแจ้งเตือนสถานะให้ลูกค้า
-    NOTI-->>SUI: 3.3 แจ้งเตือนสำเร็จ
-    SUI-->>S: 3.4 แสดงผลอัปเดตสำเร็จ
+    ORD-->>SUI: 3.2 ส่งผลอัปเดตสถานะ
+    SUI-->>S: 3.3 แสดงผลอัปเดตสำเร็จ
 ```
 
 ### 6.3 กระบวนการของผู้จัดการ : จัดการข้อมูลลูกค้า สินค้า และผู้ใช้ระบบ
@@ -561,10 +560,10 @@ sequenceDiagram
     DB-->>INV: 3.1.2 ยืนยันการอัปเดต
     INV-->>MUI: 3.2 แสดงผลอัปเดตสำเร็จ
 
-    M->>MUI: 4. จัดการผู้ใช้ระบบและสิทธิ์
+    M->>MUI: 4. จัดการผู้ใช้ระบบ
     MUI->>USR: 4.1 ส่งข้อมูลผู้ใช้ (ระงับสิทธิ์การใช้งาน)
-    USR->>DB: 4.1.1 บันทึกข้อมูลสิทธิ์ผู้ใช้งาน
-    DB-->>USR: 4.1.2 ยืนยันการเปลี่ยนแปลงสิทธิ์
+    USR->>DB: 4.1.1 บันทึกข้อมูลสถานะผู้ใช้งาน
+    DB-->>USR: 4.1.2 ยืนยันการระงับสิทธิ์
     USR-->>MUI: 4.2 แสดงผลอัปเดตผู้ใช้สำเร็จ
 ```
 
@@ -598,7 +597,7 @@ flowchart TB
 
     subgraph Data["💾 Data Layer"]
         direction LR
-        MOCK["Mock Data\n(JSON Files)"]
+        MOCK["Mock Data\n(In-Memory Store)"]
     end
 
     subgraph Roles["👥 User Roles"]
@@ -625,7 +624,7 @@ flowchart TB
 * **Styling & UI:** Tailwind CSS, shadcn/ui, Lucide React
 * **Design:** Figma
 * **Version Control:** Git, GitHub
-* **Storage / Data:** LocalStorage (Browser) / Client-side Mock Data
+* **Storage / Data:** LocalStorage (Browser) / In-Memory Mock Data (Server-side)
 
 ---
 

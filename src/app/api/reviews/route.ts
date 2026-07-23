@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ServerReviews, ServerAuth } from "@/lib/data/server-store";
+import { ServerReviews, ServerAuth, ServerOrders } from "@/lib/data/server-store";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -22,6 +22,15 @@ export async function POST(request: NextRequest) {
     const { productId, rating, comment } = body;
     if (!productId || typeof rating !== "number" || rating < 1 || rating > 5 || !comment?.trim()) {
       return NextResponse.json({ success: false, error: "ข้อมูลไม่ถูกต้อง" }, { status: 400 });
+    }
+
+    const userOrders = ServerOrders.getByUser(session.userId);
+    const hasPurchased = userOrders.some(order => 
+      order.items.some(item => item.productId === productId)
+    );
+
+    if (!hasPurchased) {
+      return NextResponse.json({ success: false, error: "คุณต้องสั่งซื้อสินค้านี้ก่อนจึงจะสามารถเขียนรีวิวได้" }, { status: 403 });
     }
 
     const user = await ServerAuth.getUserByToken(token);

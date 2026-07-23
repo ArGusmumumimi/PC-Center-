@@ -36,6 +36,7 @@ export default function ProductDetailPage() {
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewComment, setReviewComment] = useState("");
   const [submittingReview, setSubmittingReview] = useState(false);
+  const [hasPurchased, setHasPurchased] = useState(false);
 
   const isCustomer = isAuthenticated && session?.role === "customer";
 
@@ -60,6 +61,28 @@ export default function ProductDetailPage() {
   useEffect(() => {
     loadProductAndReviews();
   }, [slug]);
+
+  useEffect(() => {
+    const checkPurchaseStatus = async () => {
+      if (product && isCustomer && session?.token) {
+        try {
+          const res = await fetch("/api/orders", {
+            headers: { Authorization: `Bearer ${session.token}` },
+          });
+          const data = await res.json();
+          if (data.success) {
+            const bought = data.data.some((order: any) =>
+              order.items.some((item: any) => item.productId === product.id)
+            );
+            setHasPurchased(bought);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    checkPurchaseStatus();
+  }, [product, isCustomer, session]);
 
   const handleSubmitReview = async () => {
     if (!isCustomer || !session) {
@@ -288,43 +311,49 @@ export default function ProductDetailPage() {
           <div className="max-w-4xl mb-8 border rounded-lg p-6 bg-muted/20">
             <h3 className="font-semibold mb-4">เขียนรีวิวสินค้านี้</h3>
             {isCustomer ? (
-              <div className="space-y-4">
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => setReviewRating(star)}
-                      onMouseEnter={() => setHoverRating(star)}
-                      onMouseLeave={() => setHoverRating(0)}
-                      className="p-0.5"
-                    >
-                      <Star
-                        className={`h-6 w-6 ${
-                          star <= (hoverRating || reviewRating)
-                            ? "fill-yellow-400 text-yellow-400"
-                            : "text-muted-foreground/30"
-                        }`}
-                      />
-                    </button>
-                  ))}
+              hasPurchased ? (
+                <div className="space-y-4">
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => setReviewRating(star)}
+                        onMouseEnter={() => setHoverRating(star)}
+                        onMouseLeave={() => setHoverRating(0)}
+                        className="p-0.5"
+                      >
+                        <Star
+                          className={`h-6 w-6 ${
+                            star <= (hoverRating || reviewRating)
+                              ? "fill-yellow-400 text-yellow-400"
+                              : "text-muted-foreground/30"
+                          }`}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                  <Textarea
+                    placeholder="แชร์ความคิดเห็นของคุณเกี่ยวกับสินค้านี้..."
+                    value={reviewComment}
+                    onChange={(e) => setReviewComment(e.target.value)}
+                    rows={3}
+                  />
+                  <Button onClick={handleSubmitReview} disabled={submittingReview}>
+                    {submittingReview ? "กำลังส่ง..." : "ส่งรีวิว"}
+                  </Button>
                 </div>
-                <Textarea
-                  placeholder="แชร์ความคิดเห็นของคุณเกี่ยวกับสินค้านี้..."
-                  value={reviewComment}
-                  onChange={(e) => setReviewComment(e.target.value)}
-                  rows={3}
-                />
-                <Button onClick={handleSubmitReview} disabled={submittingReview}>
-                  {submittingReview ? "กำลังส่ง..." : "ส่งรีวิว"}
-                </Button>
-              </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  คุณต้องสั่งซื้อสินค้านี้ก่อนจึงจะสามารถเขียนรีวิวได้
+                </p>
+              )
             ) : (
               <p className="text-sm text-muted-foreground">
                 กรุณา
-                <Link href="/login" className="text-primary underline">
+                <Link href="/login" className="text-primary underline mx-1">
                   เข้าสู่ระบบ
-                </Link>{" "}
+                </Link>
                 ในฐานะลูกค้าเพื่อเขียนรีวิว
               </p>
             )}

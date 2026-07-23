@@ -438,6 +438,10 @@ classDiagram
     Customer "1" --> "0..*" Review : writes
     Customer "1" --> "0..*" ContactMessage : sends
 
+    Staff "1" --> "0..*" Order : manages
+    Manager "1" --> "0..*" Product : manages
+    Manager "1" --> "0..*" Category : manages
+
     Cart "1" *-- "0..*" CartItem
 
     Order "1" *-- "1..*" OrderItem
@@ -568,7 +572,7 @@ sequenceDiagram
 
 ## 7. Wireframe และ Prototype
 
-**Figma Design & Prototype:** [PC-Center Figma](https://www.figma.com/design/IYlNf0A4R423lRC0onIuXK/PC-Center?node-id=0-1&t=R5KfjKv478bxXQKn-1)
+**Figma Design & Prototype:** [PC-Center Figma](https://www.figma.com/design/IYlNf0A4R423lRC0onIuXK/PC-Center?node-id=0-1&t=K7EjI2luahWOsCBa-1)
 
 
 ---

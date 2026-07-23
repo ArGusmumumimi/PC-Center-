@@ -49,29 +49,6 @@ function OrderDetailContent() {
     fetchOrder();
   }, [id, session]);
 
-  const handlePay = async () => {
-    if (!session) return;
-    setPaying(true);
-    try {
-      const res = await fetch(`/api/orders/${id}/pay`, {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${session.token}` },
-      });
-      const data = await res.json();
-      if (data.success) {
-        toast.success(data.message || "ชำระเงินสำเร็จ");
-        setOrder(data.data);
-      } else {
-        toast.error(data.error || "ชำระเงินไม่สำเร็จ");
-      }
-    } catch (e) {
-      toast.error("ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้");
-      console.error(e);
-    } finally {
-      setPaying(false);
-    }
-  };
-
   if (loading) return <div className="container py-24 text-center">กำลังโหลด...</div>;
   
   if (!order) {
@@ -278,11 +255,6 @@ function OrderDetailContent() {
                   {getPaymentStatusLabel(order.paymentStatus)}
                 </Badge>
               </div>
-              {order.paymentStatus === "pending" && order.status !== "cancelled" && (
-                <Button className="w-full" onClick={handlePay} disabled={paying}>
-                  {paying ? "กำลังดำเนินการ..." : "ชำระเงิน"}
-                </Button>
-              )}
             </div>
           </div>
         </div>

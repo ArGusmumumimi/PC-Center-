@@ -187,7 +187,7 @@ export const ServerOrders = {
   getByUser(userId: string) { return orders.filter((o) => o.userId === userId); },
   getById(id: string) { return orders.find((o) => o.id === id); },
   create(data: Omit<Order, "id" | "createdAt" | "updatedAt">) {
-    const order: Order = { ...data, id: generateId("ord"), status: "pending", paymentStatus: "pending", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+    const order: Order = { ...data, id: generateId("ord"), status: "pending", paymentStatus: data.paymentStatus || "pending", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
     orders.push(order);
     
     // Deduct stock
@@ -318,6 +318,17 @@ export const ServerUsers = {
     const { password: _, ...safe } = users[index];
     return safe;
   },
+  updateProfile(id: string, data: { name?: string; phone?: string; address?: string }) {
+    const index = users.findIndex((u) => u.id === id);
+    if (index === -1) return null;
+    if (data.name !== undefined) users[index].name = data.name;
+    if (data.phone !== undefined) users[index].phone = data.phone;
+    if (data.address !== undefined) users[index].address = data.address;
+    users[index].updatedAt = new Date().toISOString();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...safe } = users[index];
+    return safe;
+  },
   create(data: { name: string; email: string; password: string; phone?: string; address?: string; role: "customer" | "staff" | "manager" }) {
     if (users.find((u) => u.email === data.email)) return { error: "อีเมลนี้ถูกใช้งานแล้ว" };
     const user: User = {
@@ -414,10 +425,32 @@ export const ServerDashboard = {
       cancelled: orders.filter((o) => o.status === "cancelled").length,
     };
 
+    const productSales: Record<string, { sales: number; revenue: number }> = {};
+    allFormattedProducts.forEach(p => {
+      productSales[p.id] = { sales: 0, revenue: 0 };
+    });
+
+    orders.forEach(order => {
+      if (order.status !== "cancelled") {
+        order.items.forEach(item => {
+          if (productSales[item.productId]) {
+            productSales[item.productId].sales += item.quantity;
+            productSales[item.productId].revenue += item.price * item.quantity;
+          }
+        });
+      }
+    });
+
     const topProducts = [...allFormattedProducts]
-      .sort((a, b) => b.reviewCount - a.reviewCount)
-      .slice(0, 5)
-      .map((p) => ({ id: p.id, name: p.name, sales: p.reviewCount, revenue: p.price * p.reviewCount, stock: p.stock }));
+      .map(p => ({
+        id: p.id,
+        name: p.name,
+        sales: productSales[p.id]?.sales || 0,
+        revenue: productSales[p.id]?.revenue || 0,
+        stock: p.stock
+      }))
+      .sort((a, b) => b.sales - a.sales)
+      .slice(0, 5);
 
     const recentOrders = [...orders]
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())

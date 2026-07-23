@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { useCart } from "@/contexts/cart-context";
 import { formatPrice } from "@/lib/format";
-import { OrderStore, generateId } from "@/lib/data/store";
+import { OrderStore, UserStore, generateId } from "@/lib/data/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
 import ProtectedRoute from "@/components/auth/protected-route";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, QrCode, CreditCard } from "lucide-react";
 
 function CheckoutContent() {
   const router = useRouter();
@@ -30,22 +30,47 @@ function CheckoutContent() {
     phone: "",
     address: "",
     paymentMethod: "credit_card",
+    ccNumber: "",
+    ccExpiry: "",
+    ccCvc: "",
+    ccName: "",
   });
 
   useEffect(() => {
     setMounted(true);
-    if (session) {
-      // Fetch user profile to prefill form - in a real app, from API
-      // Here we just use session data we have
+    if (session?.userId) {
+      const user = UserStore.getById(session.userId);
       setFormData(prev => ({
         ...prev,
-        name: session.name || "",
+        name: session.name || user?.name || "",
+        phone: user?.phone || "",
+        address: user?.address || "",
       }));
     }
   }, [session]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleNumericChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const numericValue = value.replace(/[^0-9]/g, "");
+    setFormData({ ...formData, [name]: numericValue });
+  };
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    const formatted = value.match(/.{1,4}/g)?.join(" ") || value;
+    setFormData({ ...formData, ccNumber: formatted.substring(0, 19) });
+  };
+
+  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/[^0-9]/g, "");
+    if (value.length > 2) {
+      value = value.substring(0, 2) + "/" + value.substring(2, 4);
+    }
+    setFormData({ ...formData, ccExpiry: value.substring(0, 5) });
   };
 
   const handlePaymentChange = (value: string) => {
@@ -91,6 +116,7 @@ function CheckoutContent() {
           address: formData.address,
         },
         paymentMethod: formData.paymentMethod,
+        paymentStatus: "paid",
       };
 
       const res = await fetch("/api/orders", {
@@ -160,7 +186,7 @@ function CheckoutContent() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone">เบอร์โทรศัพท์</Label>
-                  <Input id="phone" name="phone" value={formData.phone} onChange={handleChange} required />
+                  <Input id="phone" name="phone" value={formData.phone} onChange={handleNumericChange} required maxLength={10} inputMode="numeric" />
                 </div>
               </div>
               <div className="space-y-3 pt-2">
@@ -183,17 +209,56 @@ function CheckoutContent() {
           <section className="bg-card border rounded-xl p-6">
             <h2 className="text-xl font-semibold mb-6">วิธีการชำระเงิน</h2>
             <RadioGroup value={formData.paymentMethod} onValueChange={(v) => handlePaymentChange(v || "")} className="space-y-4">
-              <div className="flex items-center space-x-4 space-y-0 border p-5 rounded-xl cursor-pointer hover:bg-muted/30 hover:border-primary/50 transition-all shadow-sm">
-                <RadioGroupItem value="credit_card" id="credit_card" />
-                <Label htmlFor="credit_card" className="flex-1 cursor-pointer font-medium text-base">บัตรเครดิต / เดบิต</Label>
+              <div className="border rounded-xl overflow-hidden shadow-sm transition-all has-[:checked]:border-primary/50 has-[:checked]:bg-muted/10">
+                <div className="flex items-center space-x-4 p-5 cursor-pointer hover:bg-muted/30">
+                  <RadioGroupItem value="credit_card" id="credit_card" />
+                  <Label htmlFor="credit_card" className="flex-1 cursor-pointer font-medium text-base flex items-center gap-2">
+                    <CreditCard className="w-5 h-5 text-muted-foreground" />
+                    บัตรเครดิต / เดบิต
+                  </Label>
+                </div>
+                {formData.paymentMethod === "credit_card" && (
+                  <div className="p-5 border-t bg-muted/20 space-y-4 animate-in fade-in slide-in-from-top-2">
+                    <div className="space-y-2">
+                      <Label>หมายเลขบัตร</Label>
+                      <Input placeholder="0000 0000 0000 0000" maxLength={19} value={formData.ccNumber} onChange={handleCardNumberChange} inputMode="numeric" />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>วันหมดอายุ (MM/YY)</Label>
+                        <Input placeholder="MM/YY" maxLength={5} value={formData.ccExpiry} onChange={handleExpiryChange} inputMode="numeric" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>รหัส CVC</Label>
+                        <Input placeholder="123" maxLength={3} type="password" name="ccCvc" value={formData.ccCvc} onChange={handleNumericChange} inputMode="numeric" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label>ชื่อบนบัตร</Label>
+                      <Input placeholder="JOHN DOE" name="ccName" value={formData.ccName} onChange={(e) => setFormData({...formData, ccName: e.target.value.toUpperCase()})} />
+                    </div>
+                  </div>
+                )}
               </div>
-              <div className="flex items-center space-x-4 space-y-0 border p-5 rounded-xl cursor-pointer hover:bg-muted/30 hover:border-primary/50 transition-all shadow-sm">
-                <RadioGroupItem value="bank_transfer" id="bank_transfer" />
-                <Label htmlFor="bank_transfer" className="flex-1 cursor-pointer font-medium text-base">โอนเงินผ่านธนาคาร</Label>
-              </div>
-              <div className="flex items-center space-x-4 space-y-0 border p-5 rounded-xl cursor-pointer hover:bg-muted/30 hover:border-primary/50 transition-all shadow-sm">
-                <RadioGroupItem value="cod" id="cod" />
-                <Label htmlFor="cod" className="flex-1 cursor-pointer font-medium text-base">เก็บเงินปลายทาง (COD)</Label>
+
+              <div className="border rounded-xl overflow-hidden shadow-sm transition-all has-[:checked]:border-primary/50 has-[:checked]:bg-muted/10">
+                <div className="flex items-center space-x-4 p-5 cursor-pointer hover:bg-muted/30">
+                  <RadioGroupItem value="bank_transfer" id="bank_transfer" />
+                  <Label htmlFor="bank_transfer" className="flex-1 cursor-pointer font-medium text-base flex items-center gap-2">
+                    <QrCode className="w-5 h-5 text-muted-foreground" />
+                    โอนเงินผ่านธนาคาร (QR Code)
+                  </Label>
+                </div>
+                {formData.paymentMethod === "bank_transfer" && (
+                  <div className="p-5 border-t bg-muted/20 flex flex-col items-center justify-center space-y-4 animate-in fade-in slide-in-from-top-2">
+                    <div className="bg-white p-4 rounded-xl shadow-sm border inline-block">
+                      <QrCode className="w-32 h-32 text-slate-800" />
+                    </div>
+                    <p className="text-sm text-center text-muted-foreground max-w-xs">
+                      สแกน QR Code ด้วยแอปพลิเคชันธนาคารเพื่อชำระเงิน <br /> ยอดที่ต้องชำระ: <span className="font-semibold text-primary">{formatPrice(total)}</span>
+                    </p>
+                  </div>
+                )}
               </div>
             </RadioGroup>
           </section>
@@ -244,7 +309,7 @@ function CheckoutContent() {
               onClick={handleSubmit}
               disabled={submitting}
             >
-              {submitting ? "กำลังดำเนินการ..." : "ยืนยันการสั่งซื้อ"}
+              {submitting ? "กำลังดำเนินการ..." : "ชำระเงินและสั่งซื้อ"}
             </Button>
           </div>
         </div>

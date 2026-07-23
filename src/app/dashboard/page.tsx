@@ -39,10 +39,6 @@ function DashboardContent() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{formatPrice(stats.totalRevenue)}</div>
-            <p className="text-xs text-muted-foreground mt-1 text-green-600 flex items-center">
-              <ArrowUpRight className="mr-1 h-3 w-3" />
-              +12% จากเดือนที่แล้ว
-            </p>
           </CardContent>
         </Card>
         
@@ -81,9 +77,6 @@ function DashboardContent() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalCustomers}</div>
-            <p className="text-xs text-muted-foreground mt-1">
-              ผู้ลงทะเบียนใหม่ +5 ในสัปดาห์นี้
-            </p>
           </CardContent>
         </Card>
       </div>
@@ -102,10 +95,6 @@ function DashboardContent() {
                   <span className="font-medium">{stats.ordersByStatus.pending}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">ยืนยันแล้ว (Confirmed)</span>
-                  <span className="font-medium">{stats.ordersByStatus.confirmed}</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
                   <span className="text-muted-foreground">กำลังจัดเตรียม (Processing)</span>
                   <span className="font-medium">{stats.ordersByStatus.processing}</span>
                 </div>
@@ -116,10 +105,6 @@ function DashboardContent() {
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-muted-foreground">ส่งมอบสำเร็จ (Delivered)</span>
                   <span className="font-medium">{stats.ordersByStatus.delivered}</span>
-                </div>
-                <div className="flex justify-between items-center text-sm text-destructive">
-                  <span className="text-muted-foreground">ยกเลิก (Cancelled)</span>
-                  <span className="font-medium">{stats.ordersByStatus.cancelled}</span>
                 </div>
               </div>
             </div>
@@ -135,7 +120,7 @@ function DashboardContent() {
                 <div key={i} className="flex items-center justify-between">
                   <div className="flex flex-col min-w-0 pr-4">
                     <p className="text-sm font-medium truncate">{product.name}</p>
-                    <p className="text-xs text-muted-foreground">{product.sales} รายการรีวิว</p>
+                    <p className="text-xs text-muted-foreground">ขายได้ {product.sales} ชิ้น</p>
                   </div>
                   <div className="font-medium shrink-0">{formatPrice(product.revenue)}</div>
                 </div>

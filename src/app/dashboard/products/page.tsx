@@ -266,7 +266,7 @@ function ProductsManagementContent() {
                     <div className="font-medium">{product.name}</div>
                     <div className="text-xs text-muted-foreground uppercase">{product.brand}</div>
                   </TableCell>
-                  <TableCell>{product.category}</TableCell>
+                  <TableCell>{categories.find(c => c.slug === product.category)?.name || product.category}</TableCell>
                   <TableCell>{formatPrice(product.price)}</TableCell>
                   <TableCell>
                     {product.stock === 0 ? (

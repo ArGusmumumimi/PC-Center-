@@ -271,9 +271,6 @@ export default function ProductDetailPage() {
           <TabsTrigger value="details" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent py-4 text-base">
             รายละเอียดสินค้า
           </TabsTrigger>
-          <TabsTrigger value="specs" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent py-4 text-base">
-            สเปค (Specifications)
-          </TabsTrigger>
           <TabsTrigger value="reviews" id="reviews" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent py-4 text-base">
             รีวิว ({reviews.length})
           </TabsTrigger>
@@ -284,19 +281,6 @@ export default function ProductDetailPage() {
             <p className="whitespace-pre-wrap leading-relaxed text-muted-foreground">
               {product.description}
             </p>
-          </div>
-        </TabsContent>
-        
-        <TabsContent value="specs" className="pt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl">
-            {Object.entries(product.specs).map(([key, value]) => (
-              <div key={key} className="flex border-b pb-3">
-                <div className="w-1/3 font-medium text-muted-foreground uppercase text-sm">
-                  {key.replace(/_/g, " ")}
-                </div>
-                <div className="w-2/3">{value}</div>
-              </div>
-            ))}
           </div>
         </TabsContent>
         

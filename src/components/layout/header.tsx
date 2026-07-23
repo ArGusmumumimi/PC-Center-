@@ -177,6 +177,10 @@ export default function Header() {
                   </DropdownMenuLabel>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => router.push("/profile")}>
+                  <User className="mr-2 h-4 w-4" />
+                  ข้อมูลส่วนตัว
+                </DropdownMenuItem>
                 {session?.role === "customer" && (
                   <DropdownMenuItem onClick={() => router.push("/orders")}>
                     <Package className="mr-2 h-4 w-4" />
